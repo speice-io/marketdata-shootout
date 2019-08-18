@@ -1,0 +1,28 @@
+namespace MdShootout;
+
+union MessageBody {
+    Trade, LevelUpdate
+}
+
+table Trade {
+    price:uint64;
+    size:uint32;
+}
+
+enum Side:uint8 {
+    Buy,
+    Sell
+}
+
+table LevelUpdate {
+    price:uint64;
+    size:uint32;
+    flags:uint8;
+    side:Side;
+}
+
+table Message {
+    ts_nanos:uint64;
+    symbol:string;
+    body:MessageBody;
+}

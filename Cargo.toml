@@ -1,0 +1,15 @@
+[package]
+name = "md_shootout"
+version = "0.1.0"
+authors = ["Bradlee Speice <bradlee@speice.io>"]
+edition = "2018"
+
+[dependencies]
+capnp = "0.10.1"
+clap = "2.33.0"
+flatbuffers = "0.6.0"
+nom = "5.0.0"
+
+[build-dependencies]
+capnpc = "0.10"
+flatc-rust = "0.1.2"
