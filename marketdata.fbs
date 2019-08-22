@@ -26,3 +26,8 @@ table Message {
     symbol:string;
     body:MessageBody;
 }
+
+table MultiMessage {
+    seq_no:uint64;
+    messages:[Message];
+}

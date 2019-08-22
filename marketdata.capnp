@@ -1,7 +1,12 @@
 @0x9b88118c58e937dc;
 
+struct MultiMessage {
+    seqNo @0 :UInt64;
+    messages @1 :List(Message);
+}
+
 struct Message {
-    tsNanos @0 :Int64;
+    ts @0 :UInt64;
     symbol @1 :Text;
 
     union {

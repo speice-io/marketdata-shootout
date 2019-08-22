@@ -473,5 +473,93 @@ impl<'a: 'b, 'b> MessageBuilder<'a, 'b> {
   }
 }
 
+pub enum MultiMessageOffset {}
+#[derive(Copy, Clone, Debug, PartialEq)]
+
+pub struct MultiMessage<'a> {
+  pub _tab: flatbuffers::Table<'a>,
+}
+
+impl<'a> flatbuffers::Follow<'a> for MultiMessage<'a> {
+    type Inner = MultiMessage<'a>;
+    #[inline]
+    fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+        Self {
+            _tab: flatbuffers::Table { buf: buf, loc: loc },
+        }
+    }
+}
+
+impl<'a> MultiMessage<'a> {
+    #[inline]
+    pub fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
+        MultiMessage {
+            _tab: table,
+        }
+    }
+    #[allow(unused_mut)]
+    pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr>(
+        _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr>,
+        args: &'args MultiMessageArgs<'args>) -> flatbuffers::WIPOffset<MultiMessage<'bldr>> {
+      let mut builder = MultiMessageBuilder::new(_fbb);
+      builder.add_seq_no(args.seq_no);
+      if let Some(x) = args.messages { builder.add_messages(x); }
+      builder.finish()
+    }
+
+    pub const VT_SEQ_NO: flatbuffers::VOffsetT = 4;
+    pub const VT_MESSAGES: flatbuffers::VOffsetT = 6;
+
+  #[inline]
+  pub fn seq_no(&self) -> u64 {
+    self._tab.get::<u64>(MultiMessage::VT_SEQ_NO, Some(0)).unwrap()
+  }
+  #[inline]
+  pub fn messages(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<Message<'a>>>> {
+    self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<flatbuffers::ForwardsUOffset<Message<'a>>>>>(MultiMessage::VT_MESSAGES, None)
+  }
+}
+
+pub struct MultiMessageArgs<'a> {
+    pub seq_no: u64,
+    pub messages: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a , flatbuffers::ForwardsUOffset<Message<'a >>>>>,
+}
+impl<'a> Default for MultiMessageArgs<'a> {
+    #[inline]
+    fn default() -> Self {
+        MultiMessageArgs {
+            seq_no: 0,
+            messages: None,
+        }
+    }
+}
+pub struct MultiMessageBuilder<'a: 'b, 'b> {
+  fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a>,
+  start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
+}
+impl<'a: 'b, 'b> MultiMessageBuilder<'a, 'b> {
+  #[inline]
+  pub fn add_seq_no(&mut self, seq_no: u64) {
+    self.fbb_.push_slot::<u64>(MultiMessage::VT_SEQ_NO, seq_no, 0);
+  }
+  #[inline]
+  pub fn add_messages(&mut self, messages: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<Message<'b >>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(MultiMessage::VT_MESSAGES, messages);
+  }
+  #[inline]
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a>) -> MultiMessageBuilder<'a, 'b> {
+    let start = _fbb.start_table();
+    MultiMessageBuilder {
+      fbb_: _fbb,
+      start_: start,
+    }
+  }
+  #[inline]
+  pub fn finish(self) -> flatbuffers::WIPOffset<MultiMessage<'a>> {
+    let o = self.fbb_.end_table(self.start_);
+    flatbuffers::WIPOffset::new(o.value())
+  }
+}
+
 }  // pub mod MdShootout
 

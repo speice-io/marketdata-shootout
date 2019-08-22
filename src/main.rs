@@ -4,8 +4,6 @@
 pub mod marketdata_capnp;
 pub mod marketdata_generated; // Flatbuffers
 
-pub mod marketdata_custom;
-
 fn main() {
     println!("Hello, world!");
 }
