@@ -1,6 +1,3 @@
-use std::convert::TryInto;
-use std::mem::size_of;
-
 use nom::{
     branch::alt, bytes::complete::tag, bytes::complete::take, IResult, number::complete::*,
     sequence::tuple,
@@ -13,10 +10,14 @@ pub enum Block<'a> {
 }
 
 pub fn read_block(input: &[u8]) -> IResult<&[u8], Block> {
+    // TODO: Curious if this is faster than `match`
+    // Theoretically it should be because we're almost always using
+    // enhanced packet blocks, but don't know if the branch predictor
+    // would catch on as well.
     alt((
+        enhanced_packet_block,
         section_header_block,
         interface_description_block,
-        enhanced_packet_block,
     ))(input)
 }
 
