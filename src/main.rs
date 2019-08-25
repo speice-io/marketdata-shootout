@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
+use std::time::SystemTime;
 
 use clap::{App, Arg};
 
@@ -34,7 +35,9 @@ fn main() {
     let mut buf = Vec::new();
     file.read_to_end(&mut buf).expect(&format!("Unable to read file={}", path.display()));
 
+    let start = SystemTime::now();
     for _payload in IexParser::new(&buf[..]) {
         //dbg!(payload);
     }
+    println!("Parse time seconds={}", SystemTime::now().duration_since(start).unwrap().as_secs())
 }
