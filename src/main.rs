@@ -3,8 +3,9 @@ use std::io::Read;
 use std::path::Path;
 
 use clap::{App, Arg};
+use nom::sequence::tuple;
 
-use pcap_ng::Block;
+use parsers::Block;
 
 // Cap'n'Proto and Flatbuffers typically ask that you generate code on the fly to match
 // the schemas. For purposes of auto-complete and easy browsing in the repository,
@@ -13,7 +14,8 @@ pub mod marketdata_capnp;
 #[allow(unused_imports)]
 pub mod marketdata_generated; // Flatbuffers
 
-mod pcap_ng;
+mod iex;
+mod parsers;
 
 fn main() {
     let matches = App::new("Marketdata Shootout")
@@ -34,7 +36,7 @@ fn main() {
     file.read_to_end(&mut buf).expect(&format!("Unable to read file={}", path.display()));
 
     let mut rem = &buf[..];
-    while let Ok((unparsed, block)) = pcap_ng::read_block(rem) {
+    while let Ok((unparsed, block)) = parsers::read_block(rem) {
         let offset = (unparsed.as_ptr() as usize) - (buf.as_ptr() as usize);
         rem = unparsed;
         match block {
