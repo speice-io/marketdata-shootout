@@ -11,6 +11,9 @@ flatbuffers = "0.6.0"
 nom = "5.0.0"
 smallvec = "0.6.10"
 
+[dev-dependencies]
+alloc_counter = "0.0.2"
+
 [build-dependencies]
 capnpc = "0.10"
 flatc-rust = "0.1.2"

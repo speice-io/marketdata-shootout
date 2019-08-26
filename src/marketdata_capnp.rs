@@ -145,13 +145,14 @@ pub mod multi_message {
   }
   mod _private {
     use capnp::private::layout;
+
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 1 };
     pub const TYPE_ID: u64 = 0xd13b_1bd4_36e1_ca9f;
   }
 }
 
 pub mod message {
-  pub use self::Which::{Trade,Quote};
+  pub use self::Which::{Quote, Trade};
 
   #[derive(Copy, Clone)]
   pub struct Owned;
@@ -199,8 +200,8 @@ pub mod message {
       self.reader.total_size()
     }
     #[inline]
-    pub fn get_ts(self) -> u64 {
-      self.reader.get_data_field::<u64>(0)
+    pub fn get_ts(self) -> i64 {
+      self.reader.get_data_field::<i64>(0)
     }
     #[inline]
     pub fn get_symbol(self) -> ::capnp::Result<::capnp::text::Reader<'a>> {
@@ -284,12 +285,12 @@ pub mod message {
       self.builder.into_reader().total_size()
     }
     #[inline]
-    pub fn get_ts(self) -> u64 {
-      self.builder.get_data_field::<u64>(0)
+    pub fn get_ts(self) -> i64 {
+      self.builder.get_data_field::<i64>(0)
     }
     #[inline]
-    pub fn set_ts(&mut self, value: u64)  {
-      self.builder.set_data_field::<u64>(0, value);
+    pub fn set_ts(&mut self, value: i64) {
+      self.builder.set_data_field::<i64>(0, value);
     }
     #[inline]
     pub fn get_symbol(self) -> ::capnp::Result<::capnp::text::Builder<'a>> {
@@ -362,6 +363,7 @@ pub mod message {
   }
   mod _private {
     use capnp::private::layout;
+
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 2 };
     pub const TYPE_ID: u64 = 0x91d7_2965_3a3d_4be4;
   }
@@ -505,6 +507,7 @@ pub mod trade {
   }
   mod _private {
     use capnp::private::layout;
+
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 0 };
     pub const TYPE_ID: u64 = 0xd29e_10bd_4e5f_c241;
   }
@@ -666,6 +669,7 @@ pub mod level_update {
   }
   mod _private {
     use capnp::private::layout;
+
     pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 0 };
     pub const TYPE_ID: u64 = 0xe664_c3b5_6628_c453;
   }

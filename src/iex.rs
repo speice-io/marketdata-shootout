@@ -5,7 +5,7 @@ use nom::{bytes::complete::take, IResult, number::complete::*, sequence::tuple};
 use crate::parsers::{Block, extract_iex_data, read_block};
 
 pub struct IexParser<'a> {
-    pcap_buffer: &'a [u8]
+    pcap_buffer: &'a [u8],
 }
 
 impl<'a> IexParser<'a> {
@@ -28,7 +28,7 @@ impl<'a> Iterator for IexParser<'a> {
                     let (_, payload) = IexPayload::parse(iex_data).unwrap();
                     return Some(payload);
                 }
-                _ => ()
+                _ => (),
             }
         }
 
@@ -44,17 +44,32 @@ pub struct IexPayload {
     channel_id: u32,
     session_id: u32,
     payload_len: u16,
-    msg_count: u16,
+    pub msg_count: u16,
     stream_offset: u64,
-    first_seq_no: u64,
+    pub first_seq_no: u64,
     send_time: i64,
-    messages: smallvec::SmallVec<[IexMessage; 8]>,
+    pub messages: smallvec::SmallVec<[IexMessage; 256]>,
 }
 
 impl IexPayload {
     pub fn parse(payload: &[u8]) -> IResult<&[u8], IexPayload> {
-        let (mut rem, (version, _reserved, proto_id, channel_id, session_id, payload_len, msg_count, stream_offset, first_seq_no, send_time)) =
-            tuple((le_u8, le_u8, le_u16, le_u32, le_u32, le_u16, le_u16, le_u64, le_u64, le_i64))(payload)?;
+        let (
+            mut rem,
+            (
+                version,
+                _reserved,
+                proto_id,
+                channel_id,
+                session_id,
+                payload_len,
+                msg_count,
+                stream_offset,
+                first_seq_no,
+                send_time,
+            ),
+        ) = tuple((
+            le_u8, le_u8, le_u16, le_u32, le_u32, le_u16, le_u16, le_u64, le_u64, le_i64,
+        ))(payload)?;
 
         let mut messages = smallvec::SmallVec::new();
         for _i in 0..msg_count {
@@ -78,7 +93,7 @@ impl IexPayload {
                 first_seq_no,
                 send_time,
                 messages,
-            }
+            },
         ))
     }
 }
@@ -293,12 +308,12 @@ impl SecurityEvent {
 
 #[derive(Debug)]
 pub struct PriceLevelUpdate {
-    msg_type: u8,
-    event_flags: u8,
-    timestamp: i64,
-    symbol: [u8; 8],
-    size: u32,
-    price: u64,
+    pub msg_type: u8,
+    pub event_flags: u8,
+    pub timestamp: i64,
+    pub symbol: [u8; 8],
+    pub size: u32,
+    pub price: u64,
 }
 
 impl PriceLevelUpdate {
@@ -322,13 +337,13 @@ impl PriceLevelUpdate {
 
 #[derive(Debug)]
 pub struct TradeReport {
-    msg_type: u8,
-    sale_condition: u8,
-    timestamp: i64,
-    symbol: [u8; 8],
-    size: u32,
-    price: u64,
-    trade_id: u64,
+    pub msg_type: u8,
+    pub sale_condition: u8,
+    pub timestamp: i64,
+    pub symbol: [u8; 8],
+    pub size: u32,
+    pub price: u64,
+    pub trade_id: u64,
 }
 
 impl TradeReport {

@@ -6,7 +6,7 @@ struct MultiMessage {
 }
 
 struct Message {
-    ts @0 :UInt64;
+    ts @0 :Int64;
     symbol @1 :Text;
 
     union {
