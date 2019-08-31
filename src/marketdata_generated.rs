@@ -2,22 +2,23 @@
 
 
 
-use std::mem;
-use std::cmp::Ordering;
-
 extern crate flatbuffers;
+
+use std::cmp::Ordering;
+use std::mem;
+
 use self::flatbuffers::EndianScalar;
 
 #[allow(unused_imports, dead_code)]
 pub mod md_shootout {
+    use std::cmp::Ordering;
+    use std::mem;
 
-  use std::mem;
-  use std::cmp::Ordering;
+    use self::flatbuffers::EndianScalar;
 
-  extern crate flatbuffers;
-  use self::flatbuffers::EndianScalar;
+    extern crate flatbuffers;
 
-#[allow(non_camel_case_types)]
+    #[allow(non_camel_case_types)]
 #[repr(u8)]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum MessageBody {
@@ -383,8 +384,8 @@ impl<'a> Message<'a> {
     pub const VT_BODY: flatbuffers::VOffsetT = 10;
 
   #[inline]
-  pub fn ts_nanos(&self) -> u64 {
-    self._tab.get::<u64>(Message::VT_TS_NANOS, Some(0)).unwrap()
+  pub fn ts_nanos(&self) -> i64 {
+      self._tab.get::<i64>(Message::VT_TS_NANOS, Some(0)).unwrap()
   }
   #[inline]
   pub fn symbol(&self) -> Option<&'a str> {
@@ -421,7 +422,7 @@ impl<'a> Message<'a> {
 }
 
 pub struct MessageArgs<'a> {
-    pub ts_nanos: u64,
+    pub ts_nanos: i64,
     pub symbol: Option<flatbuffers::WIPOffset<&'a  str>>,
     pub body_type: MessageBody,
     pub body: Option<flatbuffers::WIPOffset<flatbuffers::UnionWIPOffset>>,
@@ -443,8 +444,8 @@ pub struct MessageBuilder<'a: 'b, 'b> {
 }
 impl<'a: 'b, 'b> MessageBuilder<'a, 'b> {
   #[inline]
-  pub fn add_ts_nanos(&mut self, ts_nanos: u64) {
-    self.fbb_.push_slot::<u64>(Message::VT_TS_NANOS, ts_nanos, 0);
+  pub fn add_ts_nanos(&mut self, ts_nanos: i64) {
+      self.fbb_.push_slot::<i64>(Message::VT_TS_NANOS, ts_nanos, 0);
   }
   #[inline]
   pub fn add_symbol(&mut self, symbol: flatbuffers::WIPOffset<&'b  str>) {

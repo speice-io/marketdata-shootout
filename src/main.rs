@@ -19,6 +19,7 @@ pub mod marketdata_capnp;
 pub mod marketdata_generated; // Flatbuffers
 
 mod capnp_runner;
+mod flatbuffers_runner;
 mod iex;
 mod parsers;
 
@@ -47,9 +48,11 @@ fn main() {
     let mut summarizer = Summarizer::default();
     let mut parser = IexParser::new(&buf[..]);
 
+    let mut output_buf: Vec<u8> = Vec::new();
+
+    /*
     let mut capnp_writer = capnp_runner::CapnpWriter::new();
     let capnp_reader = capnp_runner::CapnpReader::new();
-    let mut output_buf = Vec::new();
 
     for iex_payload in parser {
         //let iex_payload = parser.next().unwrap();
@@ -65,6 +68,13 @@ fn main() {
     assert_eq!(read_buf.pos, read_buf.inner.len());
     dbg!(parsed_msgs);
     dbg!(summarizer);
+    */
+
+    let mut fb_writer = flatbuffers_runner::FlatbuffersWriter::new();
+
+    for iex_payload in parser {
+        fb_writer.serialize(&iex_payload, &mut output_buf);
+    }
 }
 
 #[derive(Debug)]

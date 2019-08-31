@@ -17,6 +17,7 @@ fn __take_until<'a>(tag: &'static str, input: &'a [u8]) -> IResult<&'a [u8], &'a
 }
 
 fn parse_symbol(sym: &[u8; 8]) -> &str {
+    // TODO: Use the `jetscii` library for all that SIMD goodness
     // IEX guarantees ASCII, so we're fine using an unsafe conversion
     let (_, sym_bytes) = __take_until(" ", &sym[..]).unwrap();
     unsafe { from_utf8_unchecked(sym_bytes) }

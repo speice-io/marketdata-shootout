@@ -22,7 +22,7 @@ table LevelUpdate {
 }
 
 table Message {
-    ts_nanos:uint64;
+    ts_nanos:int64;
     symbol:string;
     body:MessageBody;
 }
