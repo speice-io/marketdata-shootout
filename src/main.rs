@@ -66,8 +66,6 @@ fn main() {
     }
 
     assert_eq!(read_buf.pos, read_buf.inner.len());
-    dbg!(parsed_msgs);
-    dbg!(summarizer);
     */
 
     let mut fb_writer = flatbuffers_runner::FlatbuffersWriter::new();
@@ -75,6 +73,17 @@ fn main() {
     for iex_payload in parser {
         fb_writer.serialize(&iex_payload, &mut output_buf);
     }
+
+    let mut read_buf = StreamVec::new(output_buf);
+
+    let fb_reader = flatbuffers_runner::FlatbuffersReader::new();
+    let mut parsed_msgs = 0;
+    while let Ok(_) = fb_reader.deserialize(&mut read_buf, &mut summarizer) {
+        parsed_msgs += 1;
+    }
+
+    dbg!(parsed_msgs);
+    dbg!(summarizer);
 }
 
 #[derive(Debug)]
