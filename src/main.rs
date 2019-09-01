@@ -48,28 +48,26 @@ fn main() {
     let mut summarizer = Summarizer::default();
     let mut parser = IexParser::new(&buf[..]);
 
-    let mut output_buf: Vec<u8> = Vec::new();
+    // Pre-allocate the same size as the backing file. Will be way more than
+    // necessary, but makes sure there's no re-allocation not related to
+    // actual parsing/serialization code
+    let mut output_buf: Vec<u8> = Vec::with_capacity(buf.capacity());
 
     /*
     let mut capnp_writer = capnp_runner::CapnpWriter::new();
-    let capnp_reader = capnp_runner::CapnpReader::new();
-
     for iex_payload in parser {
         //let iex_payload = parser.next().unwrap();
         capnp_writer.serialize(&iex_payload, &mut output_buf, true);
     }
 
+    let capnp_reader = capnp_runner::CapnpReader::new();
     let mut read_buf = StreamVec::new(output_buf);
     let mut parsed_msgs: u64 = 0;
     while let Ok(_) = capnp_reader.deserialize_packed(&mut read_buf, &mut summarizer) {
         parsed_msgs += 1;
     }
 
-    assert_eq!(read_buf.pos, read_buf.inner.len());
-    */
-
     let mut fb_writer = flatbuffers_runner::FlatbuffersWriter::new();
-
     for iex_payload in parser {
         fb_writer.serialize(&iex_payload, &mut output_buf);
     }
@@ -79,6 +77,20 @@ fn main() {
     let fb_reader = flatbuffers_runner::FlatbuffersReader::new();
     let mut parsed_msgs = 0;
     while let Ok(_) = fb_reader.deserialize(&mut read_buf, &mut summarizer) {
+        parsed_msgs += 1;
+    }
+    */
+
+    let mut capnp_writer = capnp_runner::CapnpWriter::new();
+    for iex_payload in parser {
+        //let iex_payload = parser.next().unwrap();
+        capnp_writer.serialize(&iex_payload, &mut output_buf, false);
+    }
+
+    let capnp_reader = capnp_runner::CapnpReader::new();
+    let mut read_buf = StreamVec::new(output_buf);
+    let mut parsed_msgs: u64 = 0;
+    while let Ok(_) = capnp_reader.deserialize_unpacked(&mut read_buf, &mut summarizer) {
         parsed_msgs += 1;
     }
 
