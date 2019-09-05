@@ -59,23 +59,26 @@
             -->
             <field name="timestamp" id="3" type="int64"/>
             <!--
-            SBE specifically doesn't have "union" types, so we include both a `trade` and `quote`
-            here and the tag to identify.
+            SBE specifically doesn't have "union" types, so we include a type tag, and both
+            `trade` and `quote` as "optional". This style was chosen to approximate how
+            Cap'n Proto and Flatbuffers do it:
             https://github.com/real-logic/simple-binary-encoding/issues/232
 
-            In the future, there are a couple options:
-                1. Create a "payload header" type and promote "trade" and "quote" to <sbe:message>,
-                   since the SBE message header is already able to distinguish between message types
-                2. Create a "group" for each message type, and just include no elements of that type.
-                   Uses a `u16` for each message type, instead of padding bytes for the message size.
-                3. Split up the message components and use "session types" to chain things together,
-                   as in https://polysync.io/blog/session-types-for-hearty-codecs
-
-            For now, this message format was chosen to approximate the schemas of Cap'n Proto and Flatbuffers
+            However, space is actually reserved for *both* `trade` and `quote` in the message;
+            that is, the payload size is the same if neither, one, or both are filled.
+            Other ways you can try to emulate unions:
+                1. Use a "payload header" composite type and promote "trade" and "quote" to <sbe:message>;
+                   SBE can distinguish message types based on the SBE header.
+                2. Create a "group" for each message type; adds an extra `u16` per type, but overall payload
+                   size goes down because we no longer reserve space that is potentially unused.
+                3. Split up the message components into individual <composite/> blocks, and write
+                   a state machine (by hand) to chain the blocks. For a better explanation,
+                   see "session types" in:
+                   https://polysync.io/blog/session-types-for-hearty-codecs
             -->
             <field name="msg_type" id="4" type="MsgType"/>
-            <field name="trade" id="5" type="Trade"/>
-            <field name="quote" id="6" type="Quote"/>
+            <field name="trade" id="5" type="Trade" presence="optional"/>
+            <field name="quote" id="6" type="Quote" presence="optional"/>
             <data name="symbol" id="100" type="varAsciiEncoding"/>
         </group>
     </sbe:message>

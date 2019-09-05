@@ -17,9 +17,11 @@ use crate::iex::IexParser;
 pub mod marketdata_capnp;
 #[allow(unused_imports)]
 pub mod marketdata_generated; // Flatbuffers
+pub mod marketdata_sbe;
 
 mod capnp_runner;
 mod flatbuffers_runner;
+mod sbe_runner;
 mod iex;
 mod parsers;
 
@@ -81,6 +83,7 @@ fn main() {
     }
     */
 
+    /*
     let mut capnp_writer = capnp_runner::CapnpWriter::new();
     for iex_payload in parser {
         //let iex_payload = parser.next().unwrap();
@@ -91,6 +94,20 @@ fn main() {
     let mut read_buf = StreamVec::new(output_buf);
     let mut parsed_msgs: u64 = 0;
     while let Ok(_) = capnp_reader.deserialize_unpacked(&mut read_buf, &mut summarizer) {
+        parsed_msgs += 1;
+    }
+    */
+
+    let mut sbe_writer = sbe_runner::SBEWriter::new();
+    for iex_payload in parser {
+        //let iex_payload = parser.next().unwrap();
+        sbe_writer.serialize(&iex_payload, &mut output_buf);
+    }
+
+    let sbe_reader = sbe_runner::SBEReader::new();
+    let mut read_buf = StreamVec::new(output_buf);
+    let mut parsed_msgs: u64 = 0;
+    while let Ok(_) = sbe_reader.deserialize(&mut read_buf, &mut summarizer) {
         parsed_msgs += 1;
     }
 

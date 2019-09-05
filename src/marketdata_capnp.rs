@@ -144,17 +144,17 @@ pub mod multi_message {
   impl Pipeline  {
   }
   mod _private {
-      use capnp::private::layout;
+    use capnp::private::layout;
 
-      pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 1 };
+    pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 1, pointers: 1 };
     pub const TYPE_ID: u64 = 0xd13b_1bd4_36e1_ca9f;
   }
 }
 
 pub mod message {
-    pub use self::Which::{Quote, Trade};
+  pub use self::Which::{Quote, Trade};
 
-    #[derive(Copy, Clone)]
+  #[derive(Copy, Clone)]
   pub struct Owned;
   impl <'a> ::capnp::traits::Owned<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
   impl <'a> ::capnp::traits::OwnedStruct<'a> for Owned { type Reader = Reader<'a>; type Builder = Builder<'a>; }
@@ -362,9 +362,9 @@ pub mod message {
   impl Pipeline  {
   }
   mod _private {
-      use capnp::private::layout;
+    use capnp::private::layout;
 
-      pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 2 };
+    pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 2 };
     pub const TYPE_ID: u64 = 0x91d7_2965_3a3d_4be4;
   }
   pub enum Which<A0,A1> {
@@ -506,9 +506,9 @@ pub mod trade {
   impl Pipeline  {
   }
   mod _private {
-      use capnp::private::layout;
+    use capnp::private::layout;
 
-      pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 0 };
+    pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 0 };
     pub const TYPE_ID: u64 = 0xd29e_10bd_4e5f_c241;
   }
 }
@@ -668,9 +668,9 @@ pub mod level_update {
   impl Pipeline  {
   }
   mod _private {
-      use capnp::private::layout;
+    use capnp::private::layout;
 
-      pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 0 };
+    pub const STRUCT_SIZE: layout::StructSize = layout::StructSize { data: 2, pointers: 0 };
     pub const TYPE_ID: u64 = 0xe664_c3b5_6628_c453;
   }
 }
