@@ -191,15 +191,12 @@ where
     S: RunnerSerialize,
     D: RunnerDeserialize,
 {
-    let upper = if cfg!(debug_assertions) {
-        1_000_000
-    } else {
-        100_000
-    };
     let iex_parser = IexParser::new(iex_data);
 
     let mut output_buf = Vec::with_capacity(iex_data.len());
-    let mut serialize_hist = Histogram::<u64>::new_with_bounds(1, upper, 2).unwrap();
+    // As things stand, the histogram could reallocate, but because that happens outside
+    // the measurement critical path, not too worried.
+    let mut serialize_hist = Histogram::<u64>::new(2).unwrap();
     let mut serialize_nanos_total = 0u128;
     let mut serialize_msgs = 0;
 
@@ -217,7 +214,7 @@ where
 
     let mut read_buf = StreamVec::new(output_buf);
     let mut summarizer = Summarizer::default();
-    let mut deserialize_hist = Histogram::<u64>::new_with_bounds(1, upper, 2).unwrap();
+    let mut deserialize_hist = Histogram::<u64>::new(2).unwrap();
     let mut parsed_msgs: u64 = 0;
     let mut deserialize_nanos_total = 0u128;
 
