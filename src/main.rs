@@ -6,7 +6,7 @@ use std::io::Error;
 use std::io::{BufRead, Read};
 use std::path::Path;
 use std::str::from_utf8_unchecked;
-use std::time::Instant;
+use std::time::{Instant, SystemTime};
 
 use clap::{App, Arg};
 use hdrhistogram::Histogram;
@@ -50,37 +50,60 @@ fn main() {
     file.read_to_end(&mut buf)
         .expect(&format!("Unable to read file={}", path.display()));
 
+    let analysis_start = SystemTime::now();
     let capnp_unpacked = run_analysis(
         &buf,
         &mut capnp_runner::CapnpWriter::new(false),
         &mut capnp_runner::CapnpReader::new(false),
     );
-
+    let analysis_end = SystemTime::now()
+        .duration_since(analysis_start)
+        .unwrap()
+        .as_secs();
+    println!("Cap'n Proto Unpacked total time={}s", analysis_end);
     println!("Cap'n Proto Unpacked:\n{}\n", capnp_unpacked.timing_stats());
 
+    let analysis_start = SystemTime::now();
     let capnp_packed = run_analysis(
         &buf,
         &mut capnp_runner::CapnpWriter::new(true),
         &mut capnp_runner::CapnpReader::new(true),
     );
+    let analysis_end = SystemTime::now()
+        .duration_since(analysis_start)
+        .unwrap()
+        .as_secs();
+    println!("Cap'n Proto Packed total time={}s", analysis_end);
 
     assert_eq!(capnp_unpacked.summary_stats, capnp_packed.summary_stats);
     println!("Cap'n Proto Packed:\n{}\n", capnp_packed.timing_stats());
 
+    let analysis_start = SystemTime::now();
     let flatbuffers = run_analysis(
         &buf,
         &mut flatbuffers_runner::FlatbuffersWriter::new(),
         &mut flatbuffers_runner::FlatbuffersReader::new(),
     );
+    let analysis_end = SystemTime::now()
+        .duration_since(analysis_start)
+        .unwrap()
+        .as_secs();
+    println!("Flatbuffers total time={}s", analysis_end);
 
     assert_eq!(capnp_packed.summary_stats, flatbuffers.summary_stats);
     println!("Flatbuffers:\n{}\n", flatbuffers.timing_stats());
 
+    let analysis_start = SystemTime::now();
     let sbe = run_analysis(
         &buf,
         &mut sbe_runner::SBEWriter::new(),
         &mut sbe_runner::SBEReader::new(),
     );
+    let analysis_end = SystemTime::now()
+        .duration_since(analysis_start)
+        .unwrap()
+        .as_secs();
+    println!("SBE total time={}s", analysis_end);
 
     assert_eq!(flatbuffers.summary_stats, sbe.summary_stats);
     println!("SBE:\n{}\n", sbe.timing_stats());
