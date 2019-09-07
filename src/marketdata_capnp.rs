@@ -213,7 +213,6 @@ pub mod multi_message {
     impl Pipeline {}
     mod _private {
         use capnp::private::layout;
-
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize {
             data: 1,
             pointers: 1,
@@ -508,7 +507,6 @@ pub mod message {
     impl Pipeline {}
     mod _private {
         use capnp::private::layout;
-
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize {
             data: 2,
             pointers: 2,
@@ -703,7 +701,6 @@ pub mod trade {
     impl Pipeline {}
     mod _private {
         use capnp::private::layout;
-
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize {
             data: 2,
             pointers: 0,
@@ -914,7 +911,6 @@ pub mod level_update {
     impl Pipeline {}
     mod _private {
         use capnp::private::layout;
-
         pub const STRUCT_SIZE: layout::StructSize = layout::StructSize {
             data: 2,
             pointers: 0,
