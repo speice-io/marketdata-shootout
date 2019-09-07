@@ -10,21 +10,10 @@ use capnp::serialize_packed::{read_message as read_message_packed, write_message
 use nom::bytes::complete::take_until;
 use nom::IResult;
 
-use crate::{StreamVec, Summarizer};
+use crate::{RunnerDeserialize, RunnerSerialize, StreamVec, Summarizer};
 use crate::iex::{IexMessage, IexPayload};
 use crate::marketdata_capnp::{multi_message, Side};
 use crate::marketdata_capnp::message;
-
-fn __take_until<'a>(tag: &'static str, input: &'a [u8]) -> IResult<&'a [u8], &'a [u8]> {
-    take_until(tag)(input)
-}
-
-fn parse_symbol(sym: &[u8; 8]) -> &str {
-    // TODO: Use the `jetscii` library for all that SIMD goodness
-    // IEX guarantees ASCII, so we're fine using an unsafe conversion
-    let (_, sym_bytes) = __take_until(" ", &sym[..]).unwrap();
-    unsafe { from_utf8_unchecked(sym_bytes) }
-}
 
 pub struct CapnpWriter<'a> {
     // We have to be very careful with how messages are built, as running
@@ -33,10 +22,11 @@ pub struct CapnpWriter<'a> {
     // https://github.com/capnproto/capnproto-rust/issues/111
     words: Vec<capnp::Word>,
     scratch: ScratchSpace<'a>,
+    packed: bool,
 }
 
 impl<'a> CapnpWriter<'a> {
-    pub fn new() -> CapnpWriter<'a> {
+    pub fn new(packed: bool) -> CapnpWriter<'a> {
         // Cap'n'Proto words are 8 bytes, MTU is 1500 bytes, theoretically need only 188 words.
         // In practice, let's just make sure everything fits.
         let mut words = capnp::Word::allocate_zeroed_vec(1024);
@@ -48,6 +38,7 @@ impl<'a> CapnpWriter<'a> {
         CapnpWriter {
             words,
             scratch,
+            packed
         }
     }
 
@@ -60,8 +51,10 @@ impl<'a> CapnpWriter<'a> {
             std::mem::transmute(&mut self.scratch)
         }))
     }
+}
 
-    pub fn serialize(&mut self, payload: &IexPayload, mut output: &mut Vec<u8>, packed: bool) {
+impl<'a> RunnerSerialize for CapnpWriter<'a> {
+    fn serialize(&mut self, payload: &IexPayload, mut output: &mut Vec<u8>) {
         // First, count the messages we actually care about.
         let num_msgs = payload.messages.iter().map(|m| {
             match m {
@@ -76,13 +69,13 @@ impl<'a> CapnpWriter<'a> {
 
         // And actually serialize the IEX payload to CapNProto format
 
+        // This is the safe builder used for testing
+        //let mut builder = capnp::message::Builder::new_default();
+        //let mut multimsg = builder.init_root::<multi_message::Builder>();
+
         // This is the unsafe (but faster) version
         let mut builder = self.builder();
         let mut multimsg = builder.init_root::<multi_message::Builder>();
-
-        // And the safe version used for testing
-        //let mut builder = capnp::message::Builder::new_default();
-        //let mut multimsg = builder.init_root::<multi_message::Builder>();
 
         multimsg.set_seq_no(payload.first_seq_no);
 
@@ -95,7 +88,7 @@ impl<'a> CapnpWriter<'a> {
                     current_msg_no += 1;
                     message.set_ts(tr.timestamp);
 
-                    let sym = parse_symbol(&tr.symbol);
+                    let sym = crate::parse_symbol(&tr.symbol);
                     message.reborrow().init_symbol(sym.len() as u32);
                     message.set_symbol(sym);
 
@@ -108,7 +101,7 @@ impl<'a> CapnpWriter<'a> {
                     current_msg_no += 1;
                     message.set_ts(plu.timestamp);
 
-                    let sym = parse_symbol(&plu.symbol);
+                    let sym = crate::parse_symbol(&plu.symbol);
                     message.reborrow().init_symbol(sym.len() as u32);
                     message.set_symbol(sym);
 
@@ -122,28 +115,33 @@ impl<'a> CapnpWriter<'a> {
             }
         }
 
-        let write_fn = if packed { write_message_packed } else { write_message };
+        let write_fn = if self.packed { write_message_packed } else { write_message };
 
         write_fn(&mut output, &builder).unwrap();
     }
 }
 
 pub struct CapnpReader {
-    read_opts: ReaderOptions
+    read_opts: ReaderOptions,
+    packed: bool
 }
 
 impl CapnpReader {
-    pub fn new() -> CapnpReader {
+    pub fn new(packed: bool) -> CapnpReader {
         CapnpReader {
-            read_opts: ReaderOptions::new()
+            read_opts: ReaderOptions::new(),
+            packed
         }
     }
+}
 
-    pub fn deserialize_packed(&self, buf: &mut StreamVec, stats: &mut Summarizer) -> Result<(), Error> {
+impl CapnpReader {
+    fn deserialize_packed<'a>(&self, buf: &'a mut StreamVec, stats: &mut Summarizer) -> Result<(), ()> {
         // Because `capnp::serialize_packed::PackedRead` is hidden from us, packed reads
         // *have* to both allocate new segments every read, and copy the buffer into
         // those same segments, no ability to re-use allocated memory.
-        let reader = read_message_packed(buf, self.read_opts)?;
+        let reader = read_message_packed(buf, self.read_opts)
+            .map_err(|_| ())?;
 
         let multimsg = reader.get_root::<multi_message::Reader>().unwrap();
         for msg in multimsg.get_messages().unwrap().iter() {
@@ -166,10 +164,10 @@ impl CapnpReader {
         Ok(())
     }
 
-    pub fn deserialize_unpacked(&self, buf: &mut StreamVec, stats: &mut Summarizer) -> Result<(), Error> {
-        let mut data = buf.fill_buf()?;
+    fn deserialize_unpacked(&self, buf: &mut StreamVec, stats: &mut Summarizer) -> Result<(), ()> {
+        let mut data = buf.fill_buf().map_err(|_| ())?;
         if data.len() == 0 {
-            return Err(capnp::Error::failed(String::new()));
+            return Err(());
         }
 
         let orig_data = data;
@@ -179,7 +177,7 @@ impl CapnpReader {
         Read into `OwnedSegments`, which means we copy the entire message into a new Vec. Note that
         the `data` pointer is modified underneath us, can figure out the message length by
         checking the difference between where we started and what `data` is afterward.
-        This is a trick you learn only by checking the fuzzing test cases.
+        This is a trick you learn only by looking at the fuzzing test cases.
 
         let reader = capnp::serialize::read_message(&mut data, reader_opts)?;
         let bytes_consumed = orig_data.len() - data.len();
@@ -190,11 +188,12 @@ impl CapnpReader {
         but still forces a Vec allocation for `offsets`. Also requires us to copy code from
         Cap'n'Proto because `SliceSegments` has private fields, and `read_segment_table`
         is private. And all this because `read_segment_from_words` has a length check
-        that triggers an error if our buffer is too large.
-        There is no other documentation on how to calculate `bytes_consumed` in this case
+        that triggers an error if our buffer is too large. What the hell?
+        There is no documentation on how to calculate `bytes_consumed` when parsing by hand
         that I could find, you just have to guess and check until you figure this one out.
         */
-        let (num_words, offsets) = read_segment_table(&mut data, reader_opts)?;
+        let (num_words, offsets) = read_segment_table(&mut data, reader_opts)
+            .map_err(|_| ())?;
         let words = unsafe { capnp::Word::bytes_to_words(data) };
         let reader = capnp::message::Reader::new(
             SliceSegments {
@@ -207,18 +206,19 @@ impl CapnpReader {
         let msg_bytes = num_words * size_of::<capnp::Word>();
         let bytes_consumed = segment_table_bytes + msg_bytes;
 
-        let multimsg = reader.get_root::<multi_message::Reader>()?;
-        for msg in multimsg.get_messages()?.iter() {
-            let sym = msg.get_symbol()?;
+        let multimsg = reader.get_root::<multi_message::Reader>()
+            .map_err(|_| ())?;
+        for msg in multimsg.get_messages().map_err(|_| ())?.iter() {
+            let sym = msg.get_symbol().map_err(|_| ())?;
 
-            match msg.which()? {
+            match msg.which().map_err(|_| ())? {
                 message::Trade(trade) => {
                     let trade = trade.unwrap();
                     stats.append_trade_volume(sym, trade.get_size().into());
                 },
                 message::Quote(quote) => {
                     let quote = quote.unwrap();
-                    let is_buy = match quote.get_side()? {
+                    let is_buy = match quote.get_side().unwrap() {
                         Side::Buy => true,
                         _ => false
                     };
@@ -229,6 +229,18 @@ impl CapnpReader {
 
         buf.consume(bytes_consumed);
         Ok(())
+    }
+}
+
+impl RunnerDeserialize for CapnpReader {
+    fn deserialize<'a>(&self, buf: &'a mut StreamVec, stats: &mut Summarizer) -> Result<(), ()> {
+        // While this is an extra branch per call, we're going to assume that the overhead
+        // is essentially nil in practice
+        if self.packed {
+            self.deserialize_packed(buf, stats)
+        } else {
+            self.deserialize_unpacked(buf, stats)
+        }
     }
 }
 

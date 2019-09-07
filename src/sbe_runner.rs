@@ -4,20 +4,9 @@ use std::str::from_utf8_unchecked;
 use nom::bytes::complete::take_until;
 use nom::IResult;
 
-use crate::{marketdata_sbe, StreamVec, Summarizer};
+use crate::{marketdata_sbe, RunnerDeserialize, RunnerSerialize, StreamVec, Summarizer};
 use crate::iex::{IexMessage, IexPayload};
 use crate::marketdata_sbe::{Either, MultiMessageFields, MultiMessageMessageHeader, MultiMessageMessagesMember, MultiMessageMessagesMemberEncoder, MultiMessageMessagesSymbolEncoder, Side, start_decoding_multi_message, start_encoding_multi_message};
-
-fn __take_until<'a>(tag: &'static str, input: &'a [u8]) -> IResult<&'a [u8], &'a [u8]> {
-    take_until(tag)(input)
-}
-
-fn parse_symbol(sym: &[u8; 8]) -> &str {
-    // TODO: Use the `jetscii` library for all that SIMD goodness
-    // IEX guarantees ASCII, so we're fine using an unsafe conversion
-    let (_, sym_bytes) = __take_until(" ", &sym[..]).unwrap();
-    unsafe { from_utf8_unchecked(sym_bytes) }
-}
 
 pub struct SBEWriter {
     /// Buffer to construct messages before copying. While SBE benefits
@@ -38,8 +27,10 @@ impl SBEWriter {
             default_header: MultiMessageMessageHeader::default(),
         }
     }
+}
 
-    pub fn serialize(&mut self, payload: &IexPayload, output: &mut Vec<u8>) {
+impl RunnerSerialize for SBEWriter {
+    fn serialize(&mut self, payload: &IexPayload, output: &mut Vec<u8>) {
         let (fields, encoder) = start_encoding_multi_message(&mut self.scratch_buffer[..])
             .header_copy(&self.default_header.message_header).unwrap()
             .multi_message_fields().unwrap();
@@ -59,7 +50,7 @@ impl SBEWriter {
                         ..Default::default()
                     };
                     let sym_enc: MultiMessageMessagesSymbolEncoder = enc.next_messages_member(&fields).unwrap();
-                    sym_enc.symbol(parse_symbol(&tr.symbol).as_bytes()).unwrap()
+                    sym_enc.symbol(crate::parse_symbol(&tr.symbol).as_bytes()).unwrap()
                 }
                 IexMessage::PriceLevelUpdate(plu) => {
                     let fields = MultiMessageMessagesMember {
@@ -74,7 +65,7 @@ impl SBEWriter {
                         ..Default::default()
                     };
                     let sym_enc: MultiMessageMessagesSymbolEncoder = enc.next_messages_member(&fields).unwrap();
-                    sym_enc.symbol(parse_symbol(&plu.symbol).as_bytes()).unwrap()
+                    sym_enc.symbol(crate::parse_symbol(&plu.symbol).as_bytes()).unwrap()
                 }
                 _ => enc
             }
@@ -93,8 +84,10 @@ impl SBEReader {
     pub fn new() -> SBEReader {
         SBEReader {}
     }
+}
 
-    pub fn deserialize<'a>(&self, buf: &'a mut StreamVec, stats: &mut Summarizer) -> Result<(), ()> {
+impl RunnerDeserialize for SBEReader {
+    fn deserialize<'a>(&self, buf: &'a mut StreamVec, stats: &mut Summarizer) -> Result<(), ()> {
         let data = buf.fill_buf().unwrap();
         if data.len() == 0 {
             return Err(());

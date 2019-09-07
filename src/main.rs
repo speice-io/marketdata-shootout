@@ -5,11 +5,13 @@ use std::hash::Hasher;
 use std::io::{BufRead, Read};
 use std::io::Error;
 use std::path::Path;
-use std::time::SystemTime;
+use std::str::from_utf8_unchecked;
+use std::time::{Instant, SystemTime};
 
 use clap::{App, Arg};
+use nom::{bytes::complete::take_until, IResult};
 
-use crate::iex::IexParser;
+use crate::iex::{IexParser, IexPayload};
 
 // Cap'n'Proto and Flatbuffers typically ask that you generate code on the fly to match
 // the schemas. For purposes of auto-complete and easy browsing in the repository,
@@ -68,10 +70,14 @@ fn main() {
     while let Ok(_) = capnp_reader.deserialize_packed(&mut read_buf, &mut summarizer) {
         parsed_msgs += 1;
     }
+    */
 
     let mut fb_writer = flatbuffers_runner::FlatbuffersWriter::new();
     for iex_payload in parser {
+        let now = Instant::now();
         fb_writer.serialize(&iex_payload, &mut output_buf);
+        let serialize_nanos = Instant::now().duration_since(now).as_nanos();
+        dbg!(serialize_nanos);
     }
 
     let mut read_buf = StreamVec::new(output_buf);
@@ -81,13 +87,15 @@ fn main() {
     while let Ok(_) = fb_reader.deserialize(&mut read_buf, &mut summarizer) {
         parsed_msgs += 1;
     }
-    */
 
     /*
     let mut capnp_writer = capnp_runner::CapnpWriter::new();
     for iex_payload in parser {
         //let iex_payload = parser.next().unwrap();
+        let now = Instant::now();
         capnp_writer.serialize(&iex_payload, &mut output_buf, false);
+        let serialize_nanos = Instant::now().duration_since(now).as_nanos();
+        dbg!(serialize_nanos);
     }
 
     let capnp_reader = capnp_runner::CapnpReader::new();
@@ -98,6 +106,7 @@ fn main() {
     }
     */
 
+    /*
     let mut sbe_writer = sbe_runner::SBEWriter::new();
     for iex_payload in parser {
         //let iex_payload = parser.next().unwrap();
@@ -110,6 +119,7 @@ fn main() {
     while let Ok(_) = sbe_reader.deserialize(&mut read_buf, &mut summarizer) {
         parsed_msgs += 1;
     }
+    */
 
     dbg!(parsed_msgs);
     dbg!(summarizer);
@@ -196,4 +206,23 @@ impl BufRead for StreamVec {
     fn consume(&mut self, amt: usize) {
         self.pos += amt;
     }
+}
+
+trait RunnerSerialize {
+    fn serialize(&mut self, payload: &IexPayload, output: &mut Vec<u8>);
+}
+
+trait RunnerDeserialize {
+    fn deserialize<'a>(&self, buf: &'a mut StreamVec, stats: &mut Summarizer) -> Result<(), ()>;
+}
+
+fn __take_until<'a>(tag: &'static str, input: &'a [u8]) -> IResult<&'a [u8], &'a [u8]> {
+    take_until(tag)(input)
+}
+
+fn parse_symbol(sym: &[u8; 8]) -> &str {
+    // TODO: Use the `jetscii` library for all that SIMD goodness
+    // IEX guarantees ASCII, so we're fine using an unsafe conversion
+    let (_, sym_bytes) = __take_until(" ", &sym[..]).unwrap();
+    unsafe { from_utf8_unchecked(sym_bytes) }
 }

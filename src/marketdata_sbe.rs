@@ -404,6 +404,7 @@ pub struct MultiMessageFieldsDecoder<'d> {
   scratch: ScratchDecoderData<'d>,
 }
 impl<'d> MultiMessageFieldsDecoder<'d> {
+
   pub fn wrap(scratch: ScratchDecoderData<'d>) -> MultiMessageFieldsDecoder<'d> {
     MultiMessageFieldsDecoder { scratch: scratch }
   }
@@ -418,6 +419,7 @@ pub struct MultiMessageMessageHeaderDecoder<'d> {
   scratch: ScratchDecoderData<'d>,
 }
 impl<'d> MultiMessageMessageHeaderDecoder<'d> {
+
   pub fn wrap(scratch: ScratchDecoderData<'d>) -> MultiMessageMessageHeaderDecoder<'d> {
     MultiMessageMessageHeaderDecoder { scratch: scratch }
   }
@@ -518,6 +520,7 @@ pub struct MultiMessageFieldsEncoder<'d> {
   scratch: ScratchEncoderData<'d>,
 }
 impl<'d> MultiMessageFieldsEncoder<'d> {
+
   pub fn wrap(scratch: ScratchEncoderData<'d>) -> MultiMessageFieldsEncoder<'d> {
     MultiMessageFieldsEncoder { scratch: scratch }
   }

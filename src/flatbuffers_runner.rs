@@ -7,20 +7,9 @@ use capnp::data::new_builder;
 use flatbuffers::buffer_has_identifier;
 use nom::{bytes::complete::take_until, IResult};
 
-use crate::{StreamVec, Summarizer};
+use crate::{RunnerDeserialize, RunnerSerialize, StreamVec, Summarizer};
 use crate::iex::{IexMessage, IexPayload};
 use crate::marketdata_generated::md_shootout;
-
-fn __take_until<'a>(tag: &'static str, input: &'a [u8]) -> IResult<&'a [u8], &'a [u8]> {
-    take_until(tag)(input)
-}
-
-fn parse_symbol(sym: &[u8; 8]) -> &str {
-    // TODO: Use the `jetscii` library for all that SIMD goodness
-    // IEX guarantees ASCII, so we're fine using an unsafe conversion
-    let (_, sym_bytes) = __take_until(" ", &sym[..]).unwrap();
-    unsafe { from_utf8_unchecked(sym_bytes) }
-}
 
 pub struct FlatbuffersWriter<'a> {
     builder: flatbuffers::FlatBufferBuilder<'a>,
@@ -34,8 +23,10 @@ impl<'a> FlatbuffersWriter<'a> {
             message_buffer: Vec::new(),
         }
     }
+}
 
-    pub fn serialize(&mut self, payload: &IexPayload, output: &mut Vec<u8>) {
+impl<'a> RunnerSerialize for FlatbuffersWriter<'a> {
+    fn serialize(&mut self, payload: &IexPayload, output: &mut Vec<u8>) {
 
         // Because FlatBuffers can't handle nested vectors (specifically, we can't track
         // both the variable-length vector of messages, and the variable-length strings
@@ -46,8 +37,7 @@ impl<'a> FlatbuffersWriter<'a> {
             let msg_args = match iex_msg {
                 IexMessage::TradeReport(tr) => {
                     // The `Args` objects used are wrappers over an underlying `Builder`.
-                    // We trust release builds to optimize out the wrapper, but would be
-                    // interesting to know whether that's actually the case.
+                    // We trust release builds to optimize out the wrapper.
                     let trade = md_shootout::Trade::create(
                         &mut self.builder,
                         &md_shootout::TradeArgs {
@@ -56,18 +46,11 @@ impl<'a> FlatbuffersWriter<'a> {
                         },
                     );
 
-                    /*
-                    let mut trade_builder = md_shootout::TradeBuilder::new(self.builder);
-                    trade_builder.add_price(tr.price);
-                    trade_builder.add_size_(tr.size);
-                    let trade = trade_builder.finish();
-                    */
-                    let sym_str = self.builder.create_string(parse_symbol(&tr.symbol));
+                    let sym_str = self.builder.create_string(crate::parse_symbol(&tr.symbol));
                     Some(md_shootout::MessageArgs {
                         ts_nanos: tr.timestamp,
                         symbol: Some(sym_str),
                         body_type: md_shootout::MessageBody::Trade,
-                        // Why the hell do I need the `as_union_value` function to convert to UnionWIPOffset???
                         body: Some(trade.as_union_value()),
                     })
                 }
@@ -82,7 +65,7 @@ impl<'a> FlatbuffersWriter<'a> {
                         },
                     );
 
-                    let sym_str = self.builder.create_string(parse_symbol(&plu.symbol));
+                    let sym_str = self.builder.create_string(crate::parse_symbol(&plu.symbol));
                     Some(md_shootout::MessageArgs {
                         ts_nanos: plu.timestamp,
                         symbol: Some(sym_str),
@@ -124,8 +107,10 @@ impl FlatbuffersReader {
     pub fn new() -> FlatbuffersReader {
         FlatbuffersReader {}
     }
+}
 
-    pub fn deserialize<'a>(&self, buf: &'a mut StreamVec, stats: &mut Summarizer) -> Result<(), ()> {
+impl RunnerDeserialize for FlatbuffersReader {
+    fn deserialize<'a>(&self, buf: &'a mut StreamVec, stats: &mut Summarizer) -> Result<(), ()> {
         // Flatbuffers has kinda ad-hoc support for streaming: https://github.com/google/flatbuffers/issues/3898
         // Essentially, you can write an optional `u32` value to the front of each message
         // (`finish_size_prefixed` above) to figure out how long that message actually is.
