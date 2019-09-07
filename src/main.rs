@@ -2,13 +2,14 @@ use std::cmp::{max, min};
 use std::collections::hash_map::{DefaultHasher, HashMap};
 use std::fs::File;
 use std::hash::Hasher;
-use std::io::{BufRead, Read};
 use std::io::Error;
+use std::io::{BufRead, Read};
 use std::path::Path;
 use std::str::from_utf8_unchecked;
-use std::time::{Instant, SystemTime};
+use std::time::Instant;
 
 use clap::{App, Arg};
+use hdrhistogram::Histogram;
 use nom::{bytes::complete::take_until, IResult};
 
 use crate::iex::{IexParser, IexPayload};
@@ -19,13 +20,14 @@ use crate::iex::{IexParser, IexPayload};
 pub mod marketdata_capnp;
 #[allow(unused_imports)]
 pub mod marketdata_generated; // Flatbuffers
+#[allow(dead_code)]
 pub mod marketdata_sbe;
 
 mod capnp_runner;
 mod flatbuffers_runner;
-mod sbe_runner;
 mod iex;
 mod parsers;
+mod sbe_runner;
 
 fn main() {
     let matches = App::new("Marketdata Shootout")
@@ -48,84 +50,32 @@ fn main() {
     file.read_to_end(&mut buf)
         .expect(&format!("Unable to read file={}", path.display()));
 
-    let _start = SystemTime::now();
-    let mut summarizer = Summarizer::default();
-    let mut parser = IexParser::new(&buf[..]);
+    let _capnp_unpacked = run_analysis(
+        &buf,
+        &mut capnp_runner::CapnpWriter::new(false),
+        &mut capnp_runner::CapnpReader::new(false),
+    );
 
-    // Pre-allocate the same size as the backing file. Will be way more than
-    // necessary, but makes sure there's no re-allocation not related to
-    // actual parsing/serialization code
-    let mut output_buf: Vec<u8> = Vec::with_capacity(buf.capacity());
+    let _capnp_packed = run_analysis(
+        &buf,
+        &mut capnp_runner::CapnpWriter::new(true),
+        &mut capnp_runner::CapnpReader::new(true),
+    );
 
-    /*
-    let mut capnp_writer = capnp_runner::CapnpWriter::new();
-    for iex_payload in parser {
-        //let iex_payload = parser.next().unwrap();
-        capnp_writer.serialize(&iex_payload, &mut output_buf, true);
-    }
+    let _flatbuffers = run_analysis(
+        &buf,
+        &mut flatbuffers_runner::FlatbuffersWriter::new(),
+        &mut flatbuffers_runner::FlatbuffersReader::new(),
+    );
 
-    let capnp_reader = capnp_runner::CapnpReader::new();
-    let mut read_buf = StreamVec::new(output_buf);
-    let mut parsed_msgs: u64 = 0;
-    while let Ok(_) = capnp_reader.deserialize_packed(&mut read_buf, &mut summarizer) {
-        parsed_msgs += 1;
-    }
-    */
-
-    let mut fb_writer = flatbuffers_runner::FlatbuffersWriter::new();
-    for iex_payload in parser {
-        let now = Instant::now();
-        fb_writer.serialize(&iex_payload, &mut output_buf);
-        let serialize_nanos = Instant::now().duration_since(now).as_nanos();
-        dbg!(serialize_nanos);
-    }
-
-    let mut read_buf = StreamVec::new(output_buf);
-
-    let fb_reader = flatbuffers_runner::FlatbuffersReader::new();
-    let mut parsed_msgs = 0;
-    while let Ok(_) = fb_reader.deserialize(&mut read_buf, &mut summarizer) {
-        parsed_msgs += 1;
-    }
-
-    /*
-    let mut capnp_writer = capnp_runner::CapnpWriter::new();
-    for iex_payload in parser {
-        //let iex_payload = parser.next().unwrap();
-        let now = Instant::now();
-        capnp_writer.serialize(&iex_payload, &mut output_buf, false);
-        let serialize_nanos = Instant::now().duration_since(now).as_nanos();
-        dbg!(serialize_nanos);
-    }
-
-    let capnp_reader = capnp_runner::CapnpReader::new();
-    let mut read_buf = StreamVec::new(output_buf);
-    let mut parsed_msgs: u64 = 0;
-    while let Ok(_) = capnp_reader.deserialize_unpacked(&mut read_buf, &mut summarizer) {
-        parsed_msgs += 1;
-    }
-    */
-
-    /*
-    let mut sbe_writer = sbe_runner::SBEWriter::new();
-    for iex_payload in parser {
-        //let iex_payload = parser.next().unwrap();
-        sbe_writer.serialize(&iex_payload, &mut output_buf);
-    }
-
-    let sbe_reader = sbe_runner::SBEReader::new();
-    let mut read_buf = StreamVec::new(output_buf);
-    let mut parsed_msgs: u64 = 0;
-    while let Ok(_) = sbe_reader.deserialize(&mut read_buf, &mut summarizer) {
-        parsed_msgs += 1;
-    }
-    */
-
-    dbg!(parsed_msgs);
-    dbg!(summarizer);
+    let _sbe = run_analysis(
+        &buf,
+        &mut sbe_runner::SBEWriter::new(),
+        &mut sbe_runner::SBEReader::new(),
+    );
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct SummaryStats {
     symbol: String,
     trade_volume: u64,
@@ -135,24 +85,23 @@ pub struct SummaryStats {
     ask_low: u64,
 }
 
-#[derive(Default, Debug)]
+#[derive(Default, Debug, PartialEq)]
 pub struct Summarizer {
-    data: HashMap<u64, SummaryStats>
+    data: HashMap<u64, SummaryStats>,
 }
 
 impl Summarizer {
     fn entry(&mut self, sym: &str) -> &mut SummaryStats {
         let mut hasher = DefaultHasher::new();
         hasher.write(sym.as_bytes());
-        self.data.entry(hasher.finish())
-            .or_insert(SummaryStats {
-                symbol: sym.to_string(),
-                trade_volume: 0,
-                bid_high: 0,
-                bid_low: u64::max_value(),
-                ask_high: 0,
-                ask_low: u64::max_value(),
-            })
+        self.data.entry(hasher.finish()).or_insert(SummaryStats {
+            symbol: sym.to_string(),
+            trade_volume: 0,
+            bid_high: 0,
+            bid_low: u64::max_value(),
+            ask_high: 0,
+            ask_low: u64::max_value(),
+        })
     }
 
     pub fn append_trade_volume(&mut self, sym: &str, volume: u64) {
@@ -178,10 +127,7 @@ pub struct StreamVec {
 
 impl StreamVec {
     pub fn new(buf: Vec<u8>) -> StreamVec {
-        StreamVec {
-            pos: 0,
-            inner: buf,
-        }
+        StreamVec { pos: 0, inner: buf }
     }
 }
 
@@ -189,7 +135,11 @@ impl Read for StreamVec {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize, Error> {
         // TODO: There's *got* to be a better way to handle this
         let end = self.pos + buf.len();
-        let end = if end > self.inner.len() { self.inner.len() } else { end };
+        let end = if end > self.inner.len() {
+            self.inner.len()
+        } else {
+            end
+        };
         let read_size = end - self.pos;
         buf[..read_size].copy_from_slice(&self.inner[self.pos..end]);
         self.pos = end;
@@ -225,4 +175,76 @@ fn parse_symbol(sym: &[u8; 8]) -> &str {
     // IEX guarantees ASCII, so we're fine using an unsafe conversion
     let (_, sym_bytes) = __take_until(" ", &sym[..]).unwrap();
     unsafe { from_utf8_unchecked(sym_bytes) }
+}
+
+struct RunAnalysis {
+    serialize_hist: Histogram<u64>,
+    deserialize_hist: Histogram<u64>,
+    summary_stats: Summarizer,
+    serialize_total_nanos: u128,
+    deserialize_total_nanos: u128,
+    buf_len: usize,
+}
+
+fn run_analysis<S, D>(iex_data: &Vec<u8>, serializer: &mut S, deserializer: &mut D) -> RunAnalysis
+where
+    S: RunnerSerialize,
+    D: RunnerDeserialize,
+{
+    let upper = if cfg!(debug_assertions) {
+        1_000_000
+    } else {
+        100_000
+    };
+    let iex_parser = IexParser::new(iex_data);
+
+    let mut output_buf = Vec::with_capacity(iex_data.len());
+    let mut serialize_hist = Histogram::<u64>::new_with_bounds(1, upper, 2).unwrap();
+    let mut serialize_nanos_total = 0u128;
+    let mut serialize_msgs = 0;
+
+    for iex_payload in iex_parser {
+        let serialize_start = Instant::now();
+
+        serializer.serialize(&iex_payload, &mut output_buf);
+
+        let serialize_end = Instant::now().duration_since(serialize_start).as_nanos();
+        serialize_hist.record(serialize_end as u64).unwrap();
+        serialize_nanos_total += serialize_end;
+        serialize_msgs += 1;
+    }
+    let output_len = output_buf.len();
+
+    let mut read_buf = StreamVec::new(output_buf);
+    let mut summarizer = Summarizer::default();
+    let mut deserialize_hist = Histogram::<u64>::new_with_bounds(1, upper, 2).unwrap();
+    let mut parsed_msgs: u64 = 0;
+    let mut deserialize_nanos_total = 0u128;
+
+    loop {
+        let deserialize_start = Instant::now();
+
+        let res = deserializer.deserialize(&mut read_buf, &mut summarizer);
+
+        let deserialize_end = Instant::now().duration_since(deserialize_start).as_nanos();
+
+        if res.is_ok() {
+            deserialize_hist.record(deserialize_end as u64).unwrap();
+            deserialize_nanos_total += deserialize_end;
+            parsed_msgs += 1;
+        } else {
+            break;
+        }
+    }
+
+    dbg!(serialize_msgs, parsed_msgs);
+
+    RunAnalysis {
+        serialize_hist,
+        deserialize_hist,
+        summary_stats: summarizer,
+        serialize_total_nanos: serialize_nanos_total,
+        deserialize_total_nanos: deserialize_nanos_total,
+        buf_len: output_len,
+    }
 }

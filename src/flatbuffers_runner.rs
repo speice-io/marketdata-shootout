@@ -1,15 +1,10 @@
 use std::convert::TryInto;
-use std::io::{BufRead, Error, Write};
+use std::io::{BufRead, Write};
 use std::mem::size_of;
-use std::str::from_utf8_unchecked;
 
-use capnp::data::new_builder;
-use flatbuffers::buffer_has_identifier;
-use nom::{bytes::complete::take_until, IResult};
-
-use crate::{RunnerDeserialize, RunnerSerialize, StreamVec, Summarizer};
 use crate::iex::{IexMessage, IexPayload};
 use crate::marketdata_generated::md_shootout;
+use crate::{RunnerDeserialize, RunnerSerialize, StreamVec, Summarizer};
 
 pub struct FlatbuffersWriter<'a> {
     builder: flatbuffers::FlatBufferBuilder<'a>,
@@ -27,7 +22,6 @@ impl<'a> FlatbuffersWriter<'a> {
 
 impl<'a> RunnerSerialize for FlatbuffersWriter<'a> {
     fn serialize(&mut self, payload: &IexPayload, output: &mut Vec<u8>) {
-
         // Because FlatBuffers can't handle nested vectors (specifically, we can't track
         // both the variable-length vector of messages, and the variable-length strings
         // within those messages), we have to cache the messages as they get built
@@ -61,7 +55,11 @@ impl<'a> RunnerSerialize for FlatbuffersWriter<'a> {
                             price: plu.price,
                             size_: plu.size,
                             flags: plu.event_flags,
-                            side: if plu.msg_type == 0x38 { md_shootout::Side::Buy } else { md_shootout::Side::Sell },
+                            side: if plu.msg_type == 0x38 {
+                                md_shootout::Side::Buy
+                            } else {
+                                md_shootout::Side::Sell
+                            },
                         },
                     );
 
@@ -73,7 +71,7 @@ impl<'a> RunnerSerialize for FlatbuffersWriter<'a> {
                         body: Some(level_update.as_union_value()),
                     })
                 }
-                _ => None
+                _ => None,
             };
 
             msg_args.map(|a| {
@@ -118,7 +116,7 @@ impl RunnerDeserialize for FlatbuffersReader {
         // a view over the underlying buffer.
         let data = buf.fill_buf().unwrap();
         if data.len() == 0 {
-            return Err(())
+            return Err(());
         }
 
         let msg_len_buf: [u8; 4] = data[..size_of::<u32>()].try_into().unwrap();
@@ -127,7 +125,7 @@ impl RunnerDeserialize for FlatbuffersReader {
         let multimsg = flatbuffers::get_size_prefixed_root::<md_shootout::MultiMessage>(data);
         let msg_vec = match multimsg.messages() {
             Some(m) => m,
-            None => panic!("Couldn't find messages")
+            None => panic!("Couldn't find messages"),
         };
 
         for i in 0..msg_vec.len() {
@@ -136,16 +134,16 @@ impl RunnerDeserialize for FlatbuffersReader {
                 md_shootout::MessageBody::Trade => {
                     let trade = msg.body_as_trade().unwrap();
                     stats.append_trade_volume(msg.symbol().unwrap(), trade.size_().into());
-                },
+                }
                 md_shootout::MessageBody::LevelUpdate => {
                     let lu = msg.body_as_level_update().unwrap();
                     let is_bid = match lu.side() {
                         md_shootout::Side::Buy => true,
-                        _ => false
+                        _ => false,
                     };
                     stats.update_quote_prices(msg.symbol().unwrap(), lu.price(), is_bid);
-                },
-                md_shootout::MessageBody::NONE => panic!("Unrecognized message type")
+                }
+                md_shootout::MessageBody::NONE => panic!("Unrecognized message type"),
             }
         }
 

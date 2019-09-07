@@ -1,6 +1,6 @@
 use nom::{
-    branch::alt, bytes::complete::tag, bytes::complete::take, IResult, number::complete::*,
-    sequence::tuple,
+    branch::alt, bytes::complete::tag, bytes::complete::take, number::complete::*, sequence::tuple,
+    IResult,
 };
 
 pub enum Block<'a> {

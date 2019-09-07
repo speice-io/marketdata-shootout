@@ -1,8 +1,8 @@
 use std::convert::TryInto;
 
-use nom::{bytes::complete::take, IResult, number::complete::*, sequence::tuple};
+use nom::{bytes::complete::take, number::complete::*, sequence::tuple, IResult};
 
-use crate::parsers::{Block, extract_iex_data, read_block};
+use crate::parsers::{extract_iex_data, read_block, Block};
 
 pub struct IexParser<'a> {
     pcap_buffer: &'a [u8],

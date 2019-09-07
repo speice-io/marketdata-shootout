@@ -15,7 +15,8 @@ fn main() {
         inputs: &[Path::new("marketdata.fbs")],
         out_dir: Path::new("src/"),
         ..Default::default()
-    }).expect("Unable to compile flatc");
+    })
+    .expect("Unable to compile flatc");
 
     // There's no Rust-style builder crate for SBE,
     // so we need to run the command by hand.
@@ -25,7 +26,8 @@ fn main() {
         .arg("-Dsbe.xinclude.aware=true")
         .arg("-Dsbe.target.language=uk.co.real_logic.sbe.generation.rust.Rust")
         .arg("-Dsbe.target.namespace=marketdata_sbe")
-        .arg("-jar").arg("sbe-all-1.13.2-all.jar")
+        .arg("-jar")
+        .arg("sbe-all-1.13.2-all.jar")
         .arg("marketdata.xml")
         .output()
         .expect("Unable to execute SBE compiler");

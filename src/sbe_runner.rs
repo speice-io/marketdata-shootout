@@ -1,12 +1,13 @@
 use std::io::{BufRead, Write};
 use std::str::from_utf8_unchecked;
 
-use nom::bytes::complete::take_until;
-use nom::IResult;
-
-use crate::{marketdata_sbe, RunnerDeserialize, RunnerSerialize, StreamVec, Summarizer};
 use crate::iex::{IexMessage, IexPayload};
-use crate::marketdata_sbe::{Either, MultiMessageFields, MultiMessageMessageHeader, MultiMessageMessagesMember, MultiMessageMessagesMemberEncoder, MultiMessageMessagesSymbolEncoder, Side, start_decoding_multi_message, start_encoding_multi_message};
+use crate::marketdata_sbe::{
+    start_decoding_multi_message, start_encoding_multi_message, Either, MultiMessageMessageHeader,
+    MultiMessageMessagesMember, MultiMessageMessagesMemberEncoder,
+    MultiMessageMessagesSymbolEncoder, Side,
+};
+use crate::{marketdata_sbe, RunnerDeserialize, RunnerSerialize, StreamVec, Summarizer};
 
 pub struct SBEWriter {
     /// Buffer to construct messages before copying. While SBE benefits
@@ -32,13 +33,15 @@ impl SBEWriter {
 impl RunnerSerialize for SBEWriter {
     fn serialize(&mut self, payload: &IexPayload, output: &mut Vec<u8>) {
         let (fields, encoder) = start_encoding_multi_message(&mut self.scratch_buffer[..])
-            .header_copy(&self.default_header.message_header).unwrap()
-            .multi_message_fields().unwrap();
+            .header_copy(&self.default_header.message_header)
+            .unwrap()
+            .multi_message_fields()
+            .unwrap();
         fields.sequence_number = payload.first_seq_no;
 
-        let mut encoder = encoder.messages_individually().unwrap();
-        let mut encoder: MultiMessageMessagesMemberEncoder = payload.messages.iter().fold(encoder, |enc, m| {
-            match m {
+        let encoder = encoder.messages_individually().unwrap();
+        let encoder: MultiMessageMessagesMemberEncoder =
+            payload.messages.iter().fold(encoder, |enc, m| match m {
                 IexMessage::TradeReport(tr) => {
                     let fields = MultiMessageMessagesMember {
                         msg_type: marketdata_sbe::MsgType::Trade,
@@ -49,8 +52,11 @@ impl RunnerSerialize for SBEWriter {
                         },
                         ..Default::default()
                     };
-                    let sym_enc: MultiMessageMessagesSymbolEncoder = enc.next_messages_member(&fields).unwrap();
-                    sym_enc.symbol(crate::parse_symbol(&tr.symbol).as_bytes()).unwrap()
+                    let sym_enc: MultiMessageMessagesSymbolEncoder =
+                        enc.next_messages_member(&fields).unwrap();
+                    sym_enc
+                        .symbol(crate::parse_symbol(&tr.symbol).as_bytes())
+                        .unwrap()
                 }
                 IexMessage::PriceLevelUpdate(plu) => {
                     let fields = MultiMessageMessagesMember {
@@ -60,16 +66,22 @@ impl RunnerSerialize for SBEWriter {
                             price: plu.price,
                             size: plu.size,
                             flags: plu.event_flags,
-                            side: if plu.msg_type == 0x38 { Side::Buy } else { Side::Sell },
+                            side: if plu.msg_type == 0x38 {
+                                Side::Buy
+                            } else {
+                                Side::Sell
+                            },
                         },
                         ..Default::default()
                     };
-                    let sym_enc: MultiMessageMessagesSymbolEncoder = enc.next_messages_member(&fields).unwrap();
-                    sym_enc.symbol(crate::parse_symbol(&plu.symbol).as_bytes()).unwrap()
+                    let sym_enc: MultiMessageMessagesSymbolEncoder =
+                        enc.next_messages_member(&fields).unwrap();
+                    sym_enc
+                        .symbol(crate::parse_symbol(&plu.symbol).as_bytes())
+                        .unwrap()
                 }
-                _ => enc
-            }
-        });
+                _ => enc,
+            });
 
         let finished = encoder.done_with_messages().unwrap();
         let data_len = finished.unwrap();
@@ -93,10 +105,9 @@ impl RunnerDeserialize for SBEReader {
             return Err(());
         }
 
-        let (header, decoder) = start_decoding_multi_message(data)
-            .header().unwrap();
+        let (_header, decoder) = start_decoding_multi_message(data).header().unwrap();
 
-        let (fields, decoder) = decoder.multi_message_fields().unwrap();
+        let (_fields, decoder) = decoder.multi_message_fields().unwrap();
         let mut msg_decoder = decoder.messages_individually().unwrap();
         while let Either::Left(msg) = msg_decoder {
             let (member, sym_dec) = msg.next_messages_member().unwrap();
@@ -111,10 +122,10 @@ impl RunnerDeserialize for SBEReader {
                     member.quote.price,
                     match member.quote.side {
                         Side::Buy => true,
-                        _ => false
+                        _ => false,
                     },
                 ),
-                _ => ()
+                _ => (),
             }
             msg_decoder = next_msg_dec;
         }
@@ -122,7 +133,7 @@ impl RunnerDeserialize for SBEReader {
         // We now have a `Right`, which is a finished messages block
         let msg_decoder = match msg_decoder {
             Either::Right(r) => r,
-            _ => panic!("Didn't parse all messages")
+            _ => panic!("Didn't parse all messages"),
         };
 
         // Interestingly enough, `buf.consume(msg_decoder.unwrap())` isn't OK,
