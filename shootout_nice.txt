@@ -1,0 +1,1960 @@
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=137s
+Cap'n Proto Unpacked:
+  serialize_50=263ns
+  serialize_99=1799ns
+  serialize_999=2767ns
+  deserialize_50=415ns
+  deserialize_99=839ns
+  deserialize_999=1839ns
+  serialize_total=10314074736ns
+  deserialize_total=13929975253ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=146s
+Cap'n Proto Packed:
+  serialize_50=405ns
+  serialize_99=1719ns
+  serialize_999=2943ns
+  deserialize_50=523ns
+  deserialize_99=1223ns
+  deserialize_999=2607ns
+  serialize_total=14577451489ns
+  deserialize_total=18034533086ns
+  write_len=1663894201b
+
+Flatbuffers total time=135s
+Flatbuffers:
+  serialize_50=349ns
+  serialize_99=2191ns
+  serialize_999=3471ns
+  deserialize_50=163ns
+  deserialize_99=397ns
+  deserialize_999=915ns
+  serialize_total=14111767849ns
+  deserialize_total=5613752646ns
+  write_len=4184556712b
+
+SBE total time=122s
+SBE:
+  serialize_50=86ns
+  serialize_99=1535ns
+  serialize_999=2415ns
+  deserialize_50=106ns
+  deserialize_99=254ns
+  deserialize_999=571ns
+  serialize_total=3744147119ns
+  deserialize_total=3657691168ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=98s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1799ns
+  serialize_999=2767ns
+  deserialize_50=437ns
+  deserialize_99=815ns
+  deserialize_999=1503ns
+  serialize_total=7374091679ns
+  deserialize_total=10452679105ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=105s
+Cap'n Proto Packed:
+  serialize_50=407ns
+  serialize_99=1695ns
+  serialize_999=2879ns
+  deserialize_50=575ns
+  deserialize_99=1207ns
+  deserialize_999=2079ns
+  serialize_total=10279273781ns
+  deserialize_total=14489039861ns
+  write_len=1165871477b
+
+Flatbuffers total time=96s
+Flatbuffers:
+  serialize_50=343ns
+  serialize_99=2079ns
+  serialize_999=3215ns
+  deserialize_50=190ns
+  deserialize_99=379ns
+  deserialize_999=799ns
+  serialize_total=9728396384ns
+  deserialize_total=4612465828ns
+  write_len=2943638864b
+
+SBE total time=86s
+SBE:
+  serialize_50=80ns
+  serialize_99=1527ns
+  serialize_999=2415ns
+  deserialize_50=121ns
+  deserialize_99=242ns
+  deserialize_999=497ns
+  serialize_total=2510440809ns
+  deserialize_total=2940937433ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=123s
+Cap'n Proto Unpacked:
+  serialize_50=277ns
+  serialize_99=1807ns
+  serialize_999=2799ns
+  deserialize_50=359ns
+  deserialize_99=671ns
+  deserialize_999=1327ns
+  serialize_total=9021818184ns
+  deserialize_total=10401730670ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=131s
+Cap'n Proto Packed:
+  serialize_50=419ns
+  serialize_99=1703ns
+  serialize_999=2911ns
+  deserialize_50=501ns
+  deserialize_99=847ns
+  deserialize_999=2007ns
+  serialize_total=12487871900ns
+  deserialize_total=14080786562ns
+  write_len=1381260040b
+
+Flatbuffers total time=117s
+Flatbuffers:
+  serialize_50=347ns
+  serialize_99=2095ns
+  serialize_999=3311ns
+  deserialize_50=164ns
+  deserialize_99=333ns
+  deserialize_999=839ns
+  serialize_total=11654838944ns
+  deserialize_total=4714839698ns
+  write_len=3479241656b
+
+SBE total time=104s
+SBE:
+  serialize_50=89ns
+  serialize_99=1527ns
+  serialize_999=2415ns
+  deserialize_50=108ns
+  deserialize_99=232ns
+  deserialize_999=523ns
+  serialize_total=3163192287ns
+  deserialize_total=3102397000ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=108s
+Cap'n Proto Unpacked:
+  serialize_50=275ns
+  serialize_99=1815ns
+  serialize_999=2783ns
+  deserialize_50=435ns
+  deserialize_99=811ns
+  deserialize_999=1511ns
+  serialize_total=8258091825ns
+  deserialize_total=11234936096ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=113s
+Cap'n Proto Packed:
+  serialize_50=425ns
+  serialize_99=1719ns
+  serialize_999=2895ns
+  deserialize_50=551ns
+  deserialize_99=1215ns
+  deserialize_999=2415ns
+  serialize_total=11617511194ns
+  deserialize_total=15482469236ns
+  write_len=1274173252b
+
+Flatbuffers total time=104s
+Flatbuffers:
+  serialize_50=357ns
+  serialize_99=2023ns
+  serialize_999=3167ns
+  deserialize_50=154ns
+  deserialize_99=307ns
+  deserialize_999=715ns
+  serialize_total=10867054490ns
+  deserialize_total=4110084207ns
+  write_len=3211660040b
+
+SBE total time=96s
+SBE:
+  serialize_50=87ns
+  serialize_99=1543ns
+  serialize_999=2415ns
+  deserialize_50=157ns
+  deserialize_99=303ns
+  deserialize_999=683ns
+  serialize_total=2917946618ns
+  deserialize_total=4013780098ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=134s
+Cap'n Proto Unpacked:
+  serialize_50=267ns
+  serialize_99=1815ns
+  serialize_999=2783ns
+  deserialize_50=329ns
+  deserialize_99=663ns
+  deserialize_999=1407ns
+  serialize_total=10481468753ns
+  deserialize_total=11105194713ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=147s
+Cap'n Proto Packed:
+  serialize_50=409ns
+  serialize_99=1735ns
+  serialize_999=2943ns
+  deserialize_50=543ns
+  deserialize_99=1215ns
+  deserialize_999=2447ns
+  serialize_total=14668173163ns
+  deserialize_total=19239676625ns
+  write_len=1663894201b
+
+Flatbuffers total time=138s
+Flatbuffers:
+  serialize_50=359ns
+  serialize_99=2127ns
+  serialize_999=3439ns
+  deserialize_50=227ns
+  deserialize_99=535ns
+  deserialize_999=1335ns
+  serialize_total=14342073477ns
+  deserialize_total=7681520232ns
+  write_len=4184556712b
+
+SBE total time=122s
+SBE:
+  serialize_50=87ns
+  serialize_99=1535ns
+  serialize_999=2415ns
+  deserialize_50=150ns
+  deserialize_99=365ns
+  deserialize_999=835ns
+  serialize_total=3745348115ns
+  deserialize_total=5007300517ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=103s
+Cap'n Proto Unpacked:
+  serialize_50=263ns
+  serialize_99=1783ns
+  serialize_999=2751ns
+  deserialize_50=353ns
+  deserialize_99=651ns
+  deserialize_999=1143ns
+  serialize_total=7275954790ns
+  deserialize_total=8586859892ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=112s
+Cap'n Proto Packed:
+  serialize_50=401ns
+  serialize_99=1679ns
+  serialize_999=2863ns
+  deserialize_50=543ns
+  deserialize_99=1215ns
+  deserialize_999=2319ns
+  serialize_total=10154490763ns
+  deserialize_total=14181076851ns
+  write_len=1165871477b
+
+Flatbuffers total time=98s
+Flatbuffers:
+  serialize_50=365ns
+  serialize_99=2023ns
+  serialize_999=3135ns
+  deserialize_50=157ns
+  deserialize_99=313ns
+  deserialize_999=707ns
+  serialize_total=10184293836ns
+  deserialize_total=3869660411ns
+  write_len=2943638864b
+
+SBE total time=89s
+SBE:
+  serialize_50=101ns
+  serialize_99=1543ns
+  serialize_999=2431ns
+  deserialize_50=94ns
+  deserialize_99=182ns
+  deserialize_999=407ns
+  serialize_total=2983513581ns
+  deserialize_total=2299304629ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=116s
+Cap'n Proto Unpacked:
+  serialize_50=269ns
+  serialize_99=1839ns
+  serialize_999=2831ns
+  deserialize_50=363ns
+  deserialize_99=815ns
+  deserialize_999=1671ns
+  serialize_total=8809180619ns
+  deserialize_total=11238631450ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=123s
+Cap'n Proto Packed:
+  serialize_50=403ns
+  serialize_99=1775ns
+  serialize_999=2991ns
+  deserialize_50=543ns
+  deserialize_99=1167ns
+  deserialize_999=2175ns
+  serialize_total=12190582659ns
+  deserialize_total=15986554389ns
+  write_len=1381260040b
+
+Flatbuffers total time=114s
+Flatbuffers:
+  serialize_50=351ns
+  serialize_99=2223ns
+  serialize_999=3423ns
+  deserialize_50=159ns
+  deserialize_99=325ns
+  deserialize_999=819ns
+  serialize_total=11833183034ns
+  deserialize_total=4617074632ns
+  write_len=3479241656b
+
+SBE total time=101s
+SBE:
+  serialize_50=92ns
+  serialize_99=1559ns
+  serialize_999=2447ns
+  deserialize_50=95ns
+  deserialize_99=208ns
+  deserialize_999=471ns
+  serialize_total=3253997607ns
+  deserialize_total=2748694747ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=105s
+Cap'n Proto Unpacked:
+  serialize_50=267ns
+  serialize_99=1791ns
+  serialize_999=2783ns
+  deserialize_50=349ns
+  deserialize_99=647ns
+  deserialize_999=1191ns
+  serialize_total=8170927417ns
+  deserialize_total=9126042141ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=113s
+Cap'n Proto Packed:
+  serialize_50=407ns
+  serialize_99=1719ns
+  serialize_999=2911ns
+  deserialize_50=527ns
+  deserialize_99=943ns
+  deserialize_999=1879ns
+  serialize_total=11391630393ns
+  deserialize_total=13464407502ns
+  write_len=1274173252b
+
+Flatbuffers total time=106s
+Flatbuffers:
+  serialize_50=351ns
+  serialize_99=2111ns
+  serialize_999=3359ns
+  deserialize_50=184ns
+  deserialize_99=383ns
+  deserialize_999=847ns
+  serialize_total=10944822734ns
+  deserialize_total=4931924345ns
+  write_len=3211660040b
+
+SBE total time=94s
+SBE:
+  serialize_50=90ns
+  serialize_99=1551ns
+  serialize_999=2431ns
+  deserialize_50=109ns
+  deserialize_99=222ns
+  deserialize_999=499ns
+  serialize_total=2977013961ns
+  deserialize_total=2910840935ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=149s
+Cap'n Proto Unpacked:
+  serialize_50=281ns
+  serialize_99=1911ns
+  serialize_999=3247ns
+  deserialize_50=341ns
+  deserialize_99=631ns
+  deserialize_999=1383ns
+  serialize_total=11089916344ns
+  deserialize_total=11190407596ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=158s
+Cap'n Proto Packed:
+  serialize_50=415ns
+  serialize_99=1759ns
+  serialize_999=2911ns
+  deserialize_50=547ns
+  deserialize_99=1239ns
+  deserialize_999=2767ns
+  serialize_total=14778485846ns
+  deserialize_total=19656071401ns
+  write_len=1663894201b
+
+Flatbuffers total time=138s
+Flatbuffers:
+  serialize_50=355ns
+  serialize_99=2239ns
+  serialize_999=3535ns
+  deserialize_50=159ns
+  deserialize_99=385ns
+  deserialize_999=927ns
+  serialize_total=14314948129ns
+  deserialize_total=5527869809ns
+  write_len=4184556712b
+
+SBE total time=125s
+SBE:
+  serialize_50=83ns
+  serialize_99=1527ns
+  serialize_999=2415ns
+  deserialize_50=113ns
+  deserialize_99=263ns
+  deserialize_999=595ns
+  serialize_total=3686875885ns
+  deserialize_total=3931456041ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=96s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1791ns
+  serialize_999=2751ns
+  deserialize_50=343ns
+  deserialize_99=799ns
+  deserialize_999=1351ns
+  serialize_total=7373805590ns
+  deserialize_total=8545961454ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=104s
+Cap'n Proto Packed:
+  serialize_50=407ns
+  serialize_99=1703ns
+  serialize_999=2895ns
+  deserialize_50=489ns
+  deserialize_99=831ns
+  deserialize_999=1751ns
+  serialize_total=10433674131ns
+  deserialize_total=11901248560ns
+  write_len=1165871477b
+
+Flatbuffers total time=97s
+Flatbuffers:
+  serialize_50=347ns
+  serialize_99=2127ns
+  serialize_999=3263ns
+  deserialize_50=153ns
+  deserialize_99=301ns
+  deserialize_999=659ns
+  serialize_total=9952999141ns
+  deserialize_total=3751631639ns
+  write_len=2943638864b
+
+SBE total time=86s
+SBE:
+  serialize_50=78ns
+  serialize_99=1535ns
+  serialize_999=2415ns
+  deserialize_50=97ns
+  deserialize_99=196ns
+  deserialize_999=411ns
+  serialize_total=2466437511ns
+  deserialize_total=2371261873ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=124s
+Cap'n Proto Unpacked:
+  serialize_50=257ns
+  serialize_99=1799ns
+  serialize_999=2751ns
+  deserialize_50=425ns
+  deserialize_99=815ns
+  deserialize_999=1719ns
+  serialize_total=8394571912ns
+  deserialize_total=11757555268ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=130s
+Cap'n Proto Packed:
+  serialize_50=393ns
+  serialize_99=1687ns
+  serialize_999=2847ns
+  deserialize_50=555ns
+  deserialize_99=1023ns
+  deserialize_999=2287ns
+  serialize_total=11596089685ns
+  deserialize_total=16147714163ns
+  write_len=1381260040b
+
+Flatbuffers total time=119s
+Flatbuffers:
+  serialize_50=359ns
+  serialize_99=2111ns
+  serialize_999=3343ns
+  deserialize_50=229ns
+  deserialize_99=471ns
+  deserialize_999=1167ns
+  serialize_total=11979647381ns
+  deserialize_total=6305028628ns
+  write_len=3479241656b
+
+SBE total time=103s
+SBE:
+  serialize_50=89ns
+  serialize_99=1503ns
+  serialize_999=2399ns
+  deserialize_50=112ns
+  deserialize_99=287ns
+  deserialize_999=615ns
+  serialize_total=3149879153ns
+  deserialize_total=3437885694ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=107s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1807ns
+  serialize_999=2767ns
+  deserialize_50=435ns
+  deserialize_99=811ns
+  deserialize_999=1527ns
+  serialize_total=8055176578ns
+  deserialize_total=11216103136ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=113s
+Cap'n Proto Packed:
+  serialize_50=401ns
+  serialize_99=1695ns
+  serialize_999=2863ns
+  deserialize_50=555ns
+  deserialize_99=1207ns
+  deserialize_999=2143ns
+  serialize_total=11041907994ns
+  deserialize_total=15434505270ns
+  write_len=1274173252b
+
+Flatbuffers total time=104s
+Flatbuffers:
+  serialize_50=349ns
+  serialize_99=2127ns
+  serialize_999=3311ns
+  deserialize_50=170ns
+  deserialize_99=443ns
+  deserialize_999=931ns
+  serialize_total=10746085564ns
+  deserialize_total=4721840494ns
+  write_len=3211660040b
+
+SBE total time=96s
+SBE:
+  serialize_50=91ns
+  serialize_99=1567ns
+  serialize_999=2463ns
+  deserialize_50=128ns
+  deserialize_99=248ns
+  deserialize_999=555ns
+  serialize_total=3032322941ns
+  deserialize_total=3360126091ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=145s
+Cap'n Proto Unpacked:
+  serialize_50=257ns
+  serialize_99=1799ns
+  serialize_999=2767ns
+  deserialize_50=317ns
+  deserialize_99=615ns
+  deserialize_999=1375ns
+  serialize_total=10163942244ns
+  deserialize_total=10897580779ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=158s
+Cap'n Proto Packed:
+  serialize_50=399ns
+  serialize_99=1751ns
+  serialize_999=2943ns
+  deserialize_50=527ns
+  deserialize_99=1055ns
+  deserialize_999=2303ns
+  serialize_total=14482927496ns
+  deserialize_total=17156811075ns
+  write_len=1663894201b
+
+Flatbuffers total time=139s
+Flatbuffers:
+  serialize_50=355ns
+  serialize_99=2207ns
+  serialize_999=3599ns
+  deserialize_50=169ns
+  deserialize_99=409ns
+  deserialize_999=943ns
+  serialize_total=14425021389ns
+  deserialize_total=5877572176ns
+  write_len=4184556712b
+
+SBE total time=124s
+SBE:
+  serialize_50=98ns
+  serialize_99=1535ns
+  serialize_999=2399ns
+  deserialize_50=102ns
+  deserialize_99=248ns
+  deserialize_999=567ns
+  serialize_total=4049165946ns
+  deserialize_total=3548086445ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=99s
+Cap'n Proto Unpacked:
+  serialize_50=257ns
+  serialize_99=1807ns
+  serialize_999=2783ns
+  deserialize_50=341ns
+  deserialize_99=547ns
+  deserialize_999=1063ns
+  serialize_total=7323744829ns
+  deserialize_total=7948156328ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=106s
+Cap'n Proto Packed:
+  serialize_50=391ns
+  serialize_99=1671ns
+  serialize_999=2831ns
+  deserialize_50=547ns
+  deserialize_99=1215ns
+  deserialize_999=2319ns
+  serialize_total=9944703805ns
+  deserialize_total=14192087816ns
+  write_len=1165871477b
+
+Flatbuffers total time=97s
+Flatbuffers:
+  serialize_50=349ns
+  serialize_99=2015ns
+  serialize_999=3119ns
+  deserialize_50=237ns
+  deserialize_99=469ns
+  deserialize_999=1031ns
+  serialize_total=9833215818ns
+  deserialize_total=5492779510ns
+  write_len=2943638864b
+
+SBE total time=87s
+SBE:
+  serialize_50=87ns
+  serialize_99=1527ns
+  serialize_999=2415ns
+  deserialize_50=97ns
+  deserialize_99=221ns
+  deserialize_999=435ns
+  serialize_total=2695707402ns
+  deserialize_total=2401232301ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=114s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1807ns
+  serialize_999=2783ns
+  deserialize_50=333ns
+  deserialize_99=559ns
+  deserialize_999=1215ns
+  serialize_total=8796823004ns
+  deserialize_total=9256406793ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=122s
+Cap'n Proto Packed:
+  serialize_50=407ns
+  serialize_99=1727ns
+  serialize_999=2911ns
+  deserialize_50=519ns
+  deserialize_99=1079ns
+  deserialize_999=2111ns
+  serialize_total=12272750906ns
+  deserialize_total=14313599400ns
+  write_len=1381260040b
+
+Flatbuffers total time=113s
+Flatbuffers:
+  serialize_50=349ns
+  serialize_99=2095ns
+  serialize_999=3295ns
+  deserialize_50=156ns
+  deserialize_99=327ns
+  deserialize_999=807ns
+  serialize_total=11728572731ns
+  deserialize_total=4537346143ns
+  write_len=3479241656b
+
+SBE total time=103s
+SBE:
+  serialize_50=85ns
+  serialize_99=1543ns
+  serialize_999=2447ns
+  deserialize_50=101ns
+  deserialize_99=211ns
+  deserialize_999=481ns
+  serialize_total=3137801065ns
+  deserialize_total=2919463071ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=115s
+Cap'n Proto Unpacked:
+  serialize_50=275ns
+  serialize_99=1791ns
+  serialize_999=2735ns
+  deserialize_50=433ns
+  deserialize_99=811ns
+  deserialize_999=1519ns
+  serialize_total=8192926917ns
+  deserialize_total=11200245294ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=120s
+Cap'n Proto Packed:
+  serialize_50=413ns
+  serialize_99=1695ns
+  serialize_999=2911ns
+  deserialize_50=515ns
+  deserialize_99=831ns
+  deserialize_999=1863ns
+  serialize_total=11411420877ns
+  deserialize_total=13059559824ns
+  write_len=1274173252b
+
+Flatbuffers total time=109s
+Flatbuffers:
+  serialize_50=361ns
+  serialize_99=2127ns
+  serialize_999=3343ns
+  deserialize_50=155ns
+  deserialize_99=305ns
+  deserialize_999=703ns
+  serialize_total=11175104657ns
+  deserialize_total=4121549975ns
+  write_len=3211660040b
+
+SBE total time=97s
+SBE:
+  serialize_50=97ns
+  serialize_99=1543ns
+  serialize_999=2415ns
+  deserialize_50=96ns
+  deserialize_99=200ns
+  deserialize_999=453ns
+  serialize_total=3099635510ns
+  deserialize_total=2576751916ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=148s
+Cap'n Proto Unpacked:
+  serialize_50=269ns
+  serialize_99=1823ns
+  serialize_999=2799ns
+  deserialize_50=415ns
+  deserialize_99=839ns
+  deserialize_999=1839ns
+  serialize_total=10498147308ns
+  deserialize_total=13954978466ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=157s
+Cap'n Proto Packed:
+  serialize_50=401ns
+  serialize_99=1703ns
+  serialize_999=2943ns
+  deserialize_50=555ns
+  deserialize_99=1263ns
+  deserialize_999=2751ns
+  serialize_total=14390461920ns
+  deserialize_total=19931881356ns
+  write_len=1663894201b
+
+Flatbuffers total time=140s
+Flatbuffers:
+  serialize_50=341ns
+  serialize_99=2095ns
+  serialize_999=3407ns
+  deserialize_50=228ns
+  deserialize_99=535ns
+  deserialize_999=1287ns
+  serialize_total=13804416913ns
+  deserialize_total=7722394948ns
+  write_len=4184556712b
+
+SBE total time=124s
+SBE:
+  serialize_50=86ns
+  serialize_99=1527ns
+  serialize_999=2399ns
+  deserialize_50=148ns
+  deserialize_99=351ns
+  deserialize_999=823ns
+  serialize_total=3658535674ns
+  deserialize_total=4888644566ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=96s
+Cap'n Proto Unpacked:
+  serialize_50=269ns
+  serialize_99=1807ns
+  serialize_999=2783ns
+  deserialize_50=337ns
+  deserialize_99=551ns
+  deserialize_999=1055ns
+  serialize_total=7488181683ns
+  deserialize_total=7954683932ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=105s
+Cap'n Proto Packed:
+  serialize_50=405ns
+  serialize_99=1703ns
+  serialize_999=2895ns
+  deserialize_50=571ns
+  deserialize_99=1231ns
+  deserialize_999=2143ns
+  serialize_total=10283877208ns
+  deserialize_total=14915839277ns
+  write_len=1165871477b
+
+Flatbuffers total time=97s
+Flatbuffers:
+  serialize_50=357ns
+  serialize_99=2007ns
+  serialize_999=3119ns
+  deserialize_50=179ns
+  deserialize_99=455ns
+  deserialize_999=967ns
+  serialize_total=9996994510ns
+  deserialize_total=4759497417ns
+  write_len=2943638864b
+
+SBE total time=87s
+SBE:
+  serialize_50=83ns
+  serialize_99=1527ns
+  serialize_999=2399ns
+  deserialize_50=113ns
+  deserialize_99=285ns
+  deserialize_999=583ns
+  serialize_total=2556587404ns
+  deserialize_total=2976300229ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=115s
+Cap'n Proto Unpacked:
+  serialize_50=267ns
+  serialize_99=1799ns
+  serialize_999=2751ns
+  deserialize_50=427ns
+  deserialize_99=811ns
+  deserialize_999=1599ns
+  serialize_total=8736146375ns
+  deserialize_total=11908877815ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=121s
+Cap'n Proto Packed:
+  serialize_50=403ns
+  serialize_99=1695ns
+  serialize_999=2863ns
+  deserialize_50=551ns
+  deserialize_99=1207ns
+  deserialize_999=2367ns
+  serialize_total=11961761603ns
+  deserialize_total=16640909904ns
+  write_len=1381260040b
+
+Flatbuffers total time=113s
+Flatbuffers:
+  serialize_50=349ns
+  serialize_99=2111ns
+  serialize_999=3375ns
+  deserialize_50=165ns
+  deserialize_99=331ns
+  deserialize_999=803ns
+  serialize_total=11757176338ns
+  deserialize_total=4729877974ns
+  write_len=3479241656b
+
+SBE total time=100s
+SBE:
+  serialize_50=80ns
+  serialize_99=1535ns
+  serialize_999=2415ns
+  deserialize_50=102ns
+  deserialize_99=216ns
+  deserialize_999=507ns
+  serialize_total=2974165740ns
+  deserialize_total=2955181792ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=105s
+Cap'n Proto Unpacked:
+  serialize_50=267ns
+  serialize_99=1815ns
+  serialize_999=2767ns
+  deserialize_50=365ns
+  deserialize_99=811ns
+  deserialize_999=1567ns
+  serialize_total=8054652048ns
+  deserialize_total=10523162805ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=114s
+Cap'n Proto Packed:
+  serialize_50=405ns
+  serialize_99=1719ns
+  serialize_999=2911ns
+  deserialize_50=559ns
+  deserialize_99=1215ns
+  deserialize_999=2335ns
+  serialize_total=11178412613ns
+  deserialize_total=15879438695ns
+  write_len=1274173252b
+
+Flatbuffers total time=102s
+Flatbuffers:
+  serialize_50=341ns
+  serialize_99=1999ns
+  serialize_999=3167ns
+  deserialize_50=156ns
+  deserialize_99=313ns
+  deserialize_999=759ns
+  serialize_total=10492789785ns
+  deserialize_total=4194520876ns
+  write_len=3211660040b
+
+SBE total time=95s
+SBE:
+  serialize_50=85ns
+  serialize_99=1551ns
+  serialize_999=2447ns
+  deserialize_50=153ns
+  deserialize_99=301ns
+  deserialize_999=667ns
+  serialize_total=2863172970ns
+  deserialize_total=4036837301ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=135s
+Cap'n Proto Unpacked:
+  serialize_50=267ns
+  serialize_99=1831ns
+  serialize_999=2799ns
+  deserialize_50=379ns
+  deserialize_99=819ns
+  deserialize_999=1591ns
+  serialize_total=10404586297ns
+  deserialize_total=13220564153ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=146s
+Cap'n Proto Packed:
+  serialize_50=407ns
+  serialize_99=1783ns
+  serialize_999=2927ns
+  deserialize_50=547ns
+  deserialize_99=1247ns
+  deserialize_999=2623ns
+  serialize_total=14581200279ns
+  deserialize_total=19645147526ns
+  write_len=1663894201b
+
+Flatbuffers total time=135s
+Flatbuffers:
+  serialize_50=353ns
+  serialize_99=2127ns
+  serialize_999=3407ns
+  deserialize_50=169ns
+  deserialize_99=463ns
+  deserialize_999=1127ns
+  serialize_total=14174820970ns
+  deserialize_total=6193894627ns
+  write_len=4184556712b
+
+SBE total time=123s
+SBE:
+  serialize_50=97ns
+  serialize_99=1559ns
+  serialize_999=2447ns
+  deserialize_50=96ns
+  deserialize_99=229ns
+  deserialize_999=527ns
+  serialize_total=4158690604ns
+  deserialize_total=3336998289ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=98s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1815ns
+  serialize_999=2799ns
+  deserialize_50=423ns
+  deserialize_99=783ns
+  deserialize_999=1279ns
+  serialize_total=7434319455ns
+  deserialize_total=9697464962ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=105s
+Cap'n Proto Packed:
+  serialize_50=403ns
+  serialize_99=1687ns
+  serialize_999=2863ns
+  deserialize_50=563ns
+  deserialize_99=1215ns
+  deserialize_999=2207ns
+  serialize_total=10204052749ns
+  deserialize_total=14597927071ns
+  write_len=1165871477b
+
+Flatbuffers total time=95s
+Flatbuffers:
+  serialize_50=345ns
+  serialize_99=2007ns
+  serialize_999=3119ns
+  deserialize_50=157ns
+  deserialize_99=313ns
+  deserialize_999=703ns
+  serialize_total=9753651263ns
+  deserialize_total=3857927345ns
+  write_len=2943638864b
+
+SBE total time=88s
+SBE:
+  serialize_50=84ns
+  serialize_99=1519ns
+  serialize_999=2415ns
+  deserialize_50=143ns
+  deserialize_99=297ns
+  deserialize_999=635ns
+  serialize_total=2605947249ns
+  deserialize_total=3334040605ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=115s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1799ns
+  serialize_999=2751ns
+  deserialize_50=453ns
+  deserialize_99=871ns
+  deserialize_999=1711ns
+  serialize_total=8652665315ns
+  deserialize_total=12515707855ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=122s
+Cap'n Proto Packed:
+  serialize_50=401ns
+  serialize_99=1695ns
+  serialize_999=2863ns
+  deserialize_50=559ns
+  deserialize_99=1263ns
+  deserialize_999=2623ns
+  serialize_total=11932486840ns
+  deserialize_total=17051694276ns
+  write_len=1381260040b
+
+Flatbuffers total time=110s
+Flatbuffers:
+  serialize_50=347ns
+  serialize_99=2007ns
+  serialize_999=3199ns
+  deserialize_50=154ns
+  deserialize_99=323ns
+  deserialize_999=787ns
+  serialize_total=11485568463ns
+  deserialize_total=4484579876ns
+  write_len=3479241656b
+
+SBE total time=103s
+SBE:
+  serialize_50=84ns
+  serialize_99=1535ns
+  serialize_999=2415ns
+  deserialize_50=107ns
+  deserialize_99=218ns
+  deserialize_999=501ns
+  serialize_total=3109408050ns
+  deserialize_total=3051406919ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=115s
+Cap'n Proto Unpacked:
+  serialize_50=275ns
+  serialize_99=1807ns
+  serialize_999=2767ns
+  deserialize_50=433ns
+  deserialize_99=815ns
+  deserialize_999=1551ns
+  serialize_total=8209849175ns
+  deserialize_total=11198482192ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=122s
+Cap'n Proto Packed:
+  serialize_50=411ns
+  serialize_99=1687ns
+  serialize_999=2895ns
+  deserialize_50=543ns
+  deserialize_99=1215ns
+  deserialize_999=2431ns
+  serialize_total=11284736713ns
+  deserialize_total=15338755313ns
+  write_len=1274173252b
+
+Flatbuffers total time=109s
+Flatbuffers:
+  serialize_50=353ns
+  serialize_99=2031ns
+  serialize_999=3183ns
+  deserialize_50=234ns
+  deserialize_99=467ns
+  deserialize_999=1047ns
+  serialize_total=10795783956ns
+  deserialize_total=6167587294ns
+  write_len=3211660040b
+
+SBE total time=97s
+SBE:
+  serialize_50=93ns
+  serialize_99=1535ns
+  serialize_999=2431ns
+  deserialize_50=108ns
+  deserialize_99=212ns
+  deserialize_999=487ns
+  serialize_total=3023002453ns
+  deserialize_total=2882196749ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=144s
+Cap'n Proto Unpacked:
+  serialize_50=327ns
+  serialize_99=1903ns
+  serialize_999=2927ns
+  deserialize_50=347ns
+  deserialize_99=719ns
+  deserialize_999=1487ns
+  serialize_total=12464685160ns
+  deserialize_total=11476507467ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=156s
+Cap'n Proto Packed:
+  serialize_50=465ns
+  serialize_99=1855ns
+  serialize_999=3023ns
+  deserialize_50=547ns
+  deserialize_99=1247ns
+  deserialize_999=2575ns
+  serialize_total=16562447029ns
+  deserialize_total=19616738671ns
+  write_len=1663894201b
+
+Flatbuffers total time=152s
+Flatbuffers:
+  serialize_50=361ns
+  serialize_99=2271ns
+  serialize_999=3663ns
+  deserialize_50=158ns
+  deserialize_99=379ns
+  deserialize_999=899ns
+  serialize_total=14699076150ns
+  deserialize_total=5482501541ns
+  write_len=4184556712b
+
+SBE total time=137s
+SBE:
+  serialize_50=91ns
+  serialize_99=1551ns
+  serialize_999=2431ns
+  deserialize_50=106ns
+  deserialize_99=257ns
+  deserialize_999=575ns
+  serialize_total=3922899217ns
+  deserialize_total=3661947374ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=95s
+Cap'n Proto Unpacked:
+  serialize_50=269ns
+  serialize_99=1791ns
+  serialize_999=2751ns
+  deserialize_50=331ns
+  deserialize_99=547ns
+  deserialize_999=1055ns
+  serialize_total=7459466089ns
+  deserialize_total=7868202982ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=105s
+Cap'n Proto Packed:
+  serialize_50=409ns
+  serialize_99=1711ns
+  serialize_999=2943ns
+  deserialize_50=535ns
+  deserialize_99=979ns
+  deserialize_999=1855ns
+  serialize_total=10550043643ns
+  deserialize_total=12775919263ns
+  write_len=1165871477b
+
+Flatbuffers total time=96s
+Flatbuffers:
+  serialize_50=351ns
+  serialize_99=1999ns
+  serialize_999=3103ns
+  deserialize_50=169ns
+  deserialize_99=321ns
+  deserialize_999=739ns
+  serialize_total=9874596730ns
+  deserialize_total=4095618274ns
+  write_len=2943638864b
+
+SBE total time=91s
+SBE:
+  serialize_50=84ns
+  serialize_99=1527ns
+  serialize_999=2447ns
+  deserialize_50=140ns
+  deserialize_99=283ns
+  deserialize_999=583ns
+  serialize_total=2625121566ns
+  deserialize_total=3389254536ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=122s
+Cap'n Proto Unpacked:
+  serialize_50=275ns
+  serialize_99=1831ns
+  serialize_999=2815ns
+  deserialize_50=405ns
+  deserialize_99=819ns
+  deserialize_999=1719ns
+  serialize_total=8891792188ns
+  deserialize_total=11565728651ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=132s
+Cap'n Proto Packed:
+  serialize_50=415ns
+  serialize_99=1735ns
+  serialize_999=2895ns
+  deserialize_50=555ns
+  deserialize_99=1215ns
+  deserialize_999=2367ns
+  serialize_total=12273564335ns
+  deserialize_total=16799017975ns
+  write_len=1381260040b
+
+Flatbuffers total time=116s
+Flatbuffers:
+  serialize_50=347ns
+  serialize_99=2023ns
+  serialize_999=3215ns
+  deserialize_50=235ns
+  deserialize_99=485ns
+  deserialize_999=1167ns
+  serialize_total=11515635532ns
+  deserialize_total=6646019132ns
+  write_len=3479241656b
+
+SBE total time=104s
+SBE:
+  serialize_50=82ns
+  serialize_99=1551ns
+  serialize_999=2431ns
+  deserialize_50=95ns
+  deserialize_99=205ns
+  deserialize_999=459ns
+  serialize_total=3049576919ns
+  deserialize_total=2736585524ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=105s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1791ns
+  serialize_999=2751ns
+  deserialize_50=423ns
+  deserialize_99=815ns
+  deserialize_999=1631ns
+  serialize_total=7989146534ns
+  deserialize_total=10876410806ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=113s
+Cap'n Proto Packed:
+  serialize_50=403ns
+  serialize_99=1703ns
+  serialize_999=2879ns
+  deserialize_50=559ns
+  deserialize_99=1215ns
+  deserialize_999=2271ns
+  serialize_total=11100074992ns
+  deserialize_total=15887114031ns
+  write_len=1274173252b
+
+Flatbuffers total time=102s
+Flatbuffers:
+  serialize_50=341ns
+  serialize_99=1991ns
+  serialize_999=3151ns
+  deserialize_50=160ns
+  deserialize_99=317ns
+  deserialize_999=771ns
+  serialize_total=10500909773ns
+  deserialize_total=4285184657ns
+  write_len=3211660040b
+
+SBE total time=92s
+SBE:
+  serialize_50=86ns
+  serialize_99=1527ns
+  serialize_999=2399ns
+  deserialize_50=94ns
+  deserialize_99=186ns
+  deserialize_999=427ns
+  serialize_total=2868314963ns
+  deserialize_total=2502964976ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=147s
+Cap'n Proto Unpacked:
+  serialize_50=277ns
+  serialize_99=1807ns
+  serialize_999=2783ns
+  deserialize_50=353ns
+  deserialize_99=823ns
+  deserialize_999=1807ns
+  serialize_total=10743394621ns
+  deserialize_total=12917072110ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=156s
+Cap'n Proto Packed:
+  serialize_50=417ns
+  serialize_99=1719ns
+  serialize_999=2959ns
+  deserialize_50=523ns
+  deserialize_99=1191ns
+  deserialize_999=2447ns
+  serialize_total=14859841668ns
+  deserialize_total=17511084205ns
+  write_len=1663894201b
+
+Flatbuffers total time=138s
+Flatbuffers:
+  serialize_50=357ns
+  serialize_99=2223ns
+  serialize_999=3487ns
+  deserialize_50=142ns
+  deserialize_99=345ns
+  deserialize_999=823ns
+  serialize_total=14463335718ns
+  deserialize_total=4910976972ns
+  write_len=4184556712b
+
+SBE total time=127s
+SBE:
+  serialize_50=91ns
+  serialize_99=1535ns
+  serialize_999=2479ns
+  deserialize_50=120ns
+  deserialize_99=291ns
+  deserialize_999=671ns
+  serialize_total=3992162942ns
+  deserialize_total=4018146203ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=98s
+Cap'n Proto Unpacked:
+  serialize_50=263ns
+  serialize_99=1783ns
+  serialize_999=2735ns
+  deserialize_50=431ns
+  deserialize_99=811ns
+  deserialize_999=1527ns
+  serialize_total=7296291570ns
+  deserialize_total=10294448263ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=102s
+Cap'n Proto Packed:
+  serialize_50=403ns
+  serialize_99=1687ns
+  serialize_999=2879ns
+  deserialize_50=515ns
+  deserialize_99=831ns
+  deserialize_999=1671ns
+  serialize_total=10253503395ns
+  deserialize_total=11964130963ns
+  write_len=1165871477b
+
+Flatbuffers total time=98s
+Flatbuffers:
+  serialize_50=349ns
+  serialize_99=2143ns
+  serialize_999=3327ns
+  deserialize_50=168ns
+  deserialize_99=319ns
+  deserialize_999=711ns
+  serialize_total=10069980432ns
+  deserialize_total=4075015438ns
+  write_len=2943638864b
+
+SBE total time=86s
+SBE:
+  serialize_50=79ns
+  serialize_99=1511ns
+  serialize_999=2415ns
+  deserialize_50=95ns
+  deserialize_99=207ns
+  deserialize_999=407ns
+  serialize_total=2503139621ns
+  deserialize_total=2328585584ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=114s
+Cap'n Proto Unpacked:
+  serialize_50=269ns
+  serialize_99=1807ns
+  serialize_999=2799ns
+  deserialize_50=329ns
+  deserialize_99=571ns
+  deserialize_999=1215ns
+  serialize_total=8863669624ns
+  deserialize_total=9423050092ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=123s
+Cap'n Proto Packed:
+  serialize_50=409ns
+  serialize_99=1735ns
+  serialize_999=2895ns
+  deserialize_50=531ns
+  deserialize_99=1215ns
+  deserialize_999=2415ns
+  serialize_total=12330989507ns
+  deserialize_total=15285324037ns
+  write_len=1381260040b
+
+Flatbuffers total time=111s
+Flatbuffers:
+  serialize_50=345ns
+  serialize_99=2079ns
+  serialize_999=3279ns
+  deserialize_50=156ns
+  deserialize_99=327ns
+  deserialize_999=807ns
+  serialize_total=11546527014ns
+  deserialize_total=4541395569ns
+  write_len=3479241656b
+
+SBE total time=103s
+SBE:
+  serialize_50=79ns
+  serialize_99=1535ns
+  serialize_999=2431ns
+  deserialize_50=105ns
+  deserialize_99=217ns
+  deserialize_999=497ns
+  serialize_total=2978121449ns
+  deserialize_total=3019516670ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=113s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1799ns
+  serialize_999=2751ns
+  deserialize_50=307ns
+  deserialize_99=659ns
+  deserialize_999=1295ns
+  serialize_total=8029953513ns
+  deserialize_total=8646802928ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=125s
+Cap'n Proto Packed:
+  serialize_50=409ns
+  serialize_99=1695ns
+  serialize_999=2863ns
+  deserialize_50=559ns
+  deserialize_99=1215ns
+  deserialize_999=2335ns
+  serialize_total=11257237296ns
+  deserialize_total=15806650529ns
+  write_len=1274173252b
+
+Flatbuffers total time=106s
+Flatbuffers:
+  serialize_50=363ns
+  serialize_99=2127ns
+  serialize_999=3327ns
+  deserialize_50=157ns
+  deserialize_99=313ns
+  deserialize_999=759ns
+  serialize_total=11098268072ns
+  deserialize_total=4203434595ns
+  write_len=3211660040b
+
+SBE total time=96s
+SBE:
+  serialize_50=100ns
+  serialize_99=1535ns
+  serialize_999=2415ns
+  deserialize_50=103ns
+  deserialize_99=207ns
+  deserialize_999=479ns
+  serialize_total=3203393531ns
+  deserialize_total=2759548096ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=146s
+Cap'n Proto Unpacked:
+  serialize_50=253ns
+  serialize_99=1799ns
+  serialize_999=2751ns
+  deserialize_50=421ns
+  deserialize_99=755ns
+  deserialize_999=1679ns
+  serialize_total=9959294012ns
+  deserialize_total=13283282826ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=159s
+Cap'n Proto Packed:
+  serialize_50=395ns
+  serialize_99=1735ns
+  serialize_999=2895ns
+  deserialize_50=543ns
+  deserialize_99=1255ns
+  deserialize_999=2767ns
+  serialize_total=14160917373ns
+  deserialize_total=19503769964ns
+  write_len=1663894201b
+
+Flatbuffers total time=139s
+Flatbuffers:
+  serialize_50=363ns
+  serialize_99=2223ns
+  serialize_999=3487ns
+  deserialize_50=159ns
+  deserialize_99=377ns
+  deserialize_999=883ns
+  serialize_total=14498391743ns
+  deserialize_total=5491415843ns
+  write_len=4184556712b
+
+SBE total time=125s
+SBE:
+  serialize_50=108ns
+  serialize_99=1527ns
+  serialize_999=2415ns
+  deserialize_50=111ns
+  deserialize_99=297ns
+  deserialize_999=695ns
+  serialize_total=4324552384ns
+  deserialize_total=4103258686ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=104s
+Cap'n Proto Unpacked:
+  serialize_50=265ns
+  serialize_99=1807ns
+  serialize_999=2735ns
+  deserialize_50=355ns
+  deserialize_99=811ns
+  deserialize_999=1543ns
+  serialize_total=7272428682ns
+  deserialize_total=9432535196ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=111s
+Cap'n Proto Packed:
+  serialize_50=401ns
+  serialize_99=1679ns
+  serialize_999=2863ns
+  deserialize_50=497ns
+  deserialize_99=995ns
+  deserialize_999=1935ns
+  serialize_total=10153301627ns
+  deserialize_total=12394726925ns
+  write_len=1165871477b
+
+Flatbuffers total time=99s
+Flatbuffers:
+  serialize_50=357ns
+  serialize_99=1999ns
+  serialize_999=3103ns
+  deserialize_50=182ns
+  deserialize_99=465ns
+  deserialize_999=999ns
+  serialize_total=9985079153ns
+  deserialize_total=4924981947ns
+  write_len=2943638864b
+
+SBE total time=91s
+SBE:
+  serialize_50=100ns
+  serialize_99=1527ns
+  serialize_999=2447ns
+  deserialize_50=99ns
+  deserialize_99=198ns
+  deserialize_999=415ns
+  serialize_total=2984315621ns
+  deserialize_total=2419760740ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=123s
+Cap'n Proto Unpacked:
+  serialize_50=257ns
+  serialize_99=1855ns
+  serialize_999=2847ns
+  deserialize_50=343ns
+  deserialize_99=563ns
+  deserialize_999=1279ns
+  serialize_total=8539183771ns
+  deserialize_total=9443758414ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=132s
+Cap'n Proto Packed:
+  serialize_50=389ns
+  serialize_99=1679ns
+  serialize_999=2847ns
+  deserialize_50=563ns
+  deserialize_99=1231ns
+  deserialize_999=2367ns
+  serialize_total=11621644975ns
+  deserialize_total=17034255371ns
+  write_len=1381260040b
+
+Flatbuffers total time=117s
+Flatbuffers:
+  serialize_50=357ns
+  serialize_99=2127ns
+  serialize_999=3359ns
+  deserialize_50=227ns
+  deserialize_99=473ns
+  deserialize_999=1095ns
+  serialize_total=11795617320ns
+  deserialize_total=6456686198ns
+  write_len=3479241656b
+
+SBE total time=105s
+SBE:
+  serialize_50=92ns
+  serialize_99=1519ns
+  serialize_999=2431ns
+  deserialize_50=102ns
+  deserialize_99=213ns
+  deserialize_999=483ns
+  serialize_total=3304017620ns
+  deserialize_total=2931534364ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=107s
+Cap'n Proto Unpacked:
+  serialize_50=267ns
+  serialize_99=1799ns
+  serialize_999=2815ns
+  deserialize_50=363ns
+  deserialize_99=663ns
+  deserialize_999=1247ns
+  serialize_total=8160037725ns
+  deserialize_total=9640822806ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=113s
+Cap'n Proto Packed:
+  serialize_50=409ns
+  serialize_99=1703ns
+  serialize_999=2911ns
+  deserialize_50=527ns
+  deserialize_99=843ns
+  deserialize_999=1927ns
+  serialize_total=11312202945ns
+  deserialize_total=13313610682ns
+  write_len=1274173252b
+
+Flatbuffers total time=106s
+Flatbuffers:
+  serialize_50=375ns
+  serialize_99=2159ns
+  serialize_999=3407ns
+  deserialize_50=162ns
+  deserialize_99=317ns
+  deserialize_999=775ns
+  serialize_total=11624598870ns
+  deserialize_total=4317156947ns
+  write_len=3211660040b
+
+SBE total time=94s
+SBE:
+  serialize_50=81ns
+  serialize_99=1511ns
+  serialize_999=2399ns
+  deserialize_50=145ns
+  deserialize_99=285ns
+  deserialize_999=663ns
+  serialize_total=2748585676ns
+  deserialize_total=3817810707ns
+  write_len=1670589315b
+
+data_feeds_20190903_20190903_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=143s
+Cap'n Proto Unpacked:
+  serialize_50=273ns
+  serialize_99=1791ns
+  serialize_999=2735ns
+  deserialize_50=341ns
+  deserialize_99=671ns
+  deserialize_999=1423ns
+  serialize_total=10416872300ns
+  deserialize_total=11222766409ns
+  write_len=3610255872b
+
+Cap'n Proto Packed total time=159s
+Cap'n Proto Packed:
+  serialize_50=419ns
+  serialize_99=1751ns
+  serialize_999=2943ns
+  deserialize_50=535ns
+  deserialize_99=1231ns
+  deserialize_999=2703ns
+  serialize_total=14937364884ns
+  deserialize_total=18892087172ns
+  write_len=1663894201b
+
+Flatbuffers total time=137s
+Flatbuffers:
+  serialize_50=355ns
+  serialize_99=2143ns
+  serialize_999=3471ns
+  deserialize_50=159ns
+  deserialize_99=385ns
+  deserialize_999=931ns
+  serialize_total=14260460567ns
+  deserialize_total=5528793668ns
+  write_len=4184556712b
+
+SBE total time=123s
+SBE:
+  serialize_50=90ns
+  serialize_99=1527ns
+  serialize_999=2415ns
+  deserialize_50=115ns
+  deserialize_99=307ns
+  deserialize_999=731ns
+  serialize_total=3808433942ns
+  deserialize_total=4319074138ns
+  write_len=2181103346b
+
+data_feeds_20190904_20190904_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=104s
+Cap'n Proto Unpacked:
+  serialize_50=261ns
+  serialize_99=1799ns
+  serialize_999=2783ns
+  deserialize_50=341ns
+  deserialize_99=547ns
+  deserialize_999=1055ns
+  serialize_total=7286284028ns
+  deserialize_total=7950542006ns
+  write_len=2538079928b
+
+Cap'n Proto Packed total time=110s
+Cap'n Proto Packed:
+  serialize_50=397ns
+  serialize_99=1655ns
+  serialize_999=2831ns
+  deserialize_50=535ns
+  deserialize_99=979ns
+  deserialize_999=1847ns
+  serialize_total=9995562590ns
+  deserialize_total=12753179795ns
+  write_len=1165871477b
+
+Flatbuffers total time=101s
+Flatbuffers:
+  serialize_50=367ns
+  serialize_99=2143ns
+  serialize_999=3295ns
+  deserialize_50=168ns
+  deserialize_99=317ns
+  deserialize_999=723ns
+  serialize_total=10427898475ns
+  deserialize_total=4066895584ns
+  write_len=2943638864b
+
+SBE total time=88s
+SBE:
+  serialize_50=94ns
+  serialize_99=1455ns
+  serialize_999=2367ns
+  deserialize_50=159ns
+  deserialize_99=307ns
+  deserialize_999=639ns
+  serialize_total=2767674973ns
+  deserialize_total=3802424786ns
+  write_len=1529925283b
+
+data_feeds_20190905_20190905_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=112s
+Cap'n Proto Unpacked:
+  serialize_50=257ns
+  serialize_99=1775ns
+  serialize_999=2719ns
+  deserialize_50=321ns
+  deserialize_99=559ns
+  deserialize_999=1207ns
+  serialize_total=8431893130ns
+  deserialize_total=9180227777ns
+  write_len=3000863712b
+
+Cap'n Proto Packed total time=123s
+Cap'n Proto Packed:
+  serialize_50=405ns
+  serialize_99=1735ns
+  serialize_999=2895ns
+  deserialize_50=519ns
+  deserialize_99=843ns
+  deserialize_999=1983ns
+  serialize_total=12194115395ns
+  deserialize_total=14142197537ns
+  write_len=1381260040b
+
+Flatbuffers total time=114s
+Flatbuffers:
+  serialize_50=355ns
+  serialize_99=2111ns
+  serialize_999=3343ns
+  deserialize_50=165ns
+  deserialize_99=331ns
+  deserialize_999=827ns
+  serialize_total=11919769920ns
+  deserialize_total=4724284946ns
+  write_len=3479241656b
+
+SBE total time=101s
+SBE:
+  serialize_50=87ns
+  serialize_99=1543ns
+  serialize_999=2415ns
+  deserialize_50=101ns
+  deserialize_99=211ns
+  deserialize_999=479ns
+  serialize_total=3161996978ns
+  deserialize_total=2903192214ns
+  write_len=1810173361b
+
+data_feeds_20190906_20190906_IEXTP1_DEEP1.0.pcap
+Cap'n Proto Unpacked total time=106s
+Cap'n Proto Unpacked:
+  serialize_50=269ns
+  serialize_99=1783ns
+  serialize_999=2735ns
+  deserialize_50=369ns
+  deserialize_99=819ns
+  deserialize_999=1559ns
+  serialize_total=8038377131ns
+  deserialize_total=10585246893ns
+  write_len=2770044200b
+
+Cap'n Proto Packed total time=114s
+Cap'n Proto Packed:
+  serialize_50=407ns
+  serialize_99=1703ns
+  serialize_999=2879ns
+  deserialize_50=563ns
+  deserialize_99=1215ns
+  deserialize_999=2287ns
+  serialize_total=11213256058ns
+  deserialize_total=15915639523ns
+  write_len=1274173252b
+
+Flatbuffers total time=104s
+Flatbuffers:
+  serialize_50=345ns
+  serialize_99=2079ns
+  serialize_999=3263ns
+  deserialize_50=179ns
+  deserialize_99=459ns
+  deserialize_999=1031ns
+  serialize_total=10643808056ns
+  deserialize_total=5233650383ns
+  write_len=3211660040b
+
+SBE total time=94s
+SBE:
+  serialize_50=87ns
+  serialize_99=1479ns
+  serialize_999=2399ns
+  deserialize_50=156ns
+  deserialize_99=303ns
+  deserialize_999=679ns
+  serialize_total=2920668295ns
+  deserialize_total=4034869937ns
+  write_len=1670589315b
+
