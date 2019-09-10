@@ -27,18 +27,23 @@ def main(filename: str, run_format: str):
     with open(filename, 'r') as handle:
         lines = handle.readlines()
 
+    num_blocks = 4
+    num_dates = 4
+    block_len = 12
+
+    current_line = 0
     for i in range(run_count):
-        num_blocks = 4
-        block_len = 12
-        run_date = lines[i * num_blocks * block_len + i].split('_')[2]
+        for d in range(num_dates):
+            run_date = lines[current_line].split('_')[2]
+            current_line += 1
 
-        for block in range(num_blocks):
-            lower_block = i * block_len * num_blocks + block * block_len + i + 1
-            upper_block = i * block_len * num_blocks + block * block_len + block_len + i + 1
+            for block in range(num_blocks):
+                lower_block = current_line
+                upper_block = current_line + block_len
 
-            inner_lines = lines[lower_block:upper_block]
-            rec = parse_block(inner_lines, run_format, run_date)
-            records.append(rec)
+                rec = parse_block(lines[lower_block:upper_block], run_format, run_date)
+                records.append(rec)
+                current_line += block_len
 
     return records
 
@@ -48,11 +53,11 @@ if __name__ == '__main__':
 
     runs = [
         ('shootout_normal.txt', ''),
-        ('shootout_taskset.txt', ''),
-        ('shootout_nice.txt', '')
+        ('shootout_taskset.txt', 'taskset'),
+        ('shootout_nice.txt', 'taskset + nice')
     ]
     for fname, run_format in runs:
         for record in main(fname, run_format):
             all_records.append(record)
 
-    pd.DataFrame.from_records(all_records).to_csv('shootout.csv')
+    pd.DataFrame.from_records(all_records).to_csv('shootout.csv', index=False)
